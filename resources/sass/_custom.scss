@@ -1,0 +1,19 @@
+.pointer {
+    cursor: pointer;
+}
+
+.card-body > .table-responsive > .table > thead > tr > th {
+    border-top-width: 0;
+}
+
+// Override box shadow main-sidebar
+// .elevation-4 {
+//     box-shadow: none !important;
+// }
+
+.table-vertical-center {
+    th,
+    td {
+        vertical-align: middle !important;
+    }
+}
