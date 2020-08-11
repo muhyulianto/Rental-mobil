@@ -26,50 +26,50 @@
                                 </th>
                                 <th>
                                     <a href="{{ Request::fullUrlWithQuery([
-                                        'orderBy'   => 'nama',
+                                        'orderBy'   => 'name',
                                         'orderType' => $orderType
                                     ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
-                                        NAMA PELANGGAN
+                                        Customer Name
                                         <i class="fas fa-sort"></i>
                                     </a>
                                 </th>
                                 <th>
                                     <a href="{{ Request::fullUrlWithQuery([
-                                        'orderBy'   => 'nama_mobil',
+                                        'orderBy'   => 'name',
                                         'orderType' => $orderType
                                     ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
-                                        NAMA MOBIL
+                                        Car Name
                                         <i class="fas fa-sort"></i>
                                     </a>
                                 </th>
                                 <th>
                                     <a href="{{ Request::fullUrlWithQuery([
-                                        'orderBy'   => 'mulai_sewa',
+                                        'orderBy'   => 'start_date',
                                         'orderType' => $orderType
                                     ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
-                                        MULAI SEWA
+                                        Start date
                                         <i class="fas fa-sort"></i>
                                     </a>
                                 </th>
                                 <th>
                                     <a href="{{ Request::fullUrlWithQuery([
-                                        'orderBy'   => 'lama_sewa',
+                                        'orderBy'   => 'duration',
                                         'orderType' => $orderType
                                     ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
-                                        LAMA SEWA
+                                        Duration
                                         <i class="fas fa-sort"></i>
                                     </a>
                                 </th>
                                 <th>
                                     <a href="{{ Request::fullUrlWithQuery([
-                                        'orderBy'   => 'tipe_peminjaman',
+                                        'orderBy'   => 'services_type',
                                         'orderType' => $orderType
                                     ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
-                                        TIPE PEMINJAMAN
+                                        Services Type
                                         <i class="fas fa-sort"></i>
                                     </a>
                                 </th>
-                                <th class="text-right">AKSI</th>
+                                <th class="text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,19 +79,19 @@
                                     {{ $key + 1 }}
                                 </td>
                                 <td>
-                                    <a href="{{ route("customer.show", $rent->id_customer) }}">
-                                        {{ $rent->nama}}
+                                    <a href="{{ route("customer.show", $rent->customer_id) }}">
+                                        {{ $rent->name}}
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{ route("car.show", $rent->id_mobil) }}">
+                                    <a href="{{ route("car.show", $rent->car_id) }}">
                                         {{ $rent->nama_lengkap_mobil}}
                                     </a>
                                 </td>
-                                <td>{{ $rent->format_mulai_sewa }}</td>
-                                <td>{{ $rent->lama_sewa.' Hari' }}</td>
+                                <td>{{ $rent->format_start_date }}</td>
+                                <td>{{ $rent->format_duration }}</td>
                                 <td>
-                                    {{ $rent->format_tipe_peminjaman }}
+                                    {{ $rent->format_services_type }}
                                 </td>
                                 <td class="text-right">
 
@@ -102,7 +102,7 @@
                                     </button>
 
 
-                                    @elseif ($rent->status == 'jalan')
+                                    @elseif ($rent->status == 'onloan')
                                     <a href="{{ route('rent_show', $rent->id) }}" type="button" class="btn btn-primary btn-sm">
                                         <i class="fas fa-arrow-right    "></i>
                                     </a>

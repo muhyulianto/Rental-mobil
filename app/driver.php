@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class driver extends Model
+class Driver extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,10 +12,10 @@ class driver extends Model
      * @var array
      */
     protected $fillable = [
-        'driver_name', 'driver_age', 'driver_address', 'driver_phone'
+        'name', 'age', 'address', 'phone_number'
     ];
 
-    public function getFormatDriverAgeAttribute() {
-        return $this->driver_age." Tahun";
+    public function getFormatAgeAttribute() {
+        return $this->age." Tahun";
     }
 }

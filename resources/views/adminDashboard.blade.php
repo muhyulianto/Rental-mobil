@@ -52,7 +52,7 @@
                         {{ $notif->data['pesan'] }}
                         <form action="{{ route('readNotification', $notif->id) }}" method="post" class="d-inline-block">
                             @csrf
-                            <input type="hidden" name="id_payment" value="{{ $notif->data['data']['id'] }}">
+                            <input type="hidden" name="id_Invoice" value="{{ $notif->data['data']['id'] }}">
                             <button class="btn btn-link text-primary p-0" type="submit">Disini!</button>
                         </form>
                     </div>

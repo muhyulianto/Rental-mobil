@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Payment;
+use Alert;
+use App\Invoice;
 use App\Rent;
 use App\Armada;
 use App\Driver;
-use Alert;
 use Illuminate\Http\Request;
 
-class PaymentController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,33 +23,33 @@ class PaymentController extends Controller
         $orderType = $request->orderType ? $request->orderType : 'DESC';
 
         if ($request->has('search_query')) {
-            $payments = Payment::with('customers')
-            ->join('customers', 'payments.id_customer', '=', 'customers.id')
-            ->select('payments.*', 'customers.nama')
-            ->where('nama', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('nomor_tagihan', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('total_harga', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('status', 'LIKE', '%'.$request->search_query.'%')
-            ->orderBy($orderBy, $orderType)
-            ->paginate(10);
+            $invoices = Invoice::with('customers')
+                ->join('customers', 'invoices.customer_id', '=', 'customers.id')
+                ->select('invoices.*', 'customers.name')
+                ->where('name', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('invoice_number', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('total_price', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('status', 'LIKE', '%' . $request->search_query . '%')
+                ->orderBy($orderBy, $orderType)
+                ->paginate(10);
         } else {
-            $payments = Payment::with('customers')
-            ->join('customers', 'payments.id_customer', '=', 'customers.id')
-            ->select('payments.*', 'customers.nama')
-            ->orderBy($orderBy, $orderType)
-            ->paginate(10);
+            $invoices = Invoice::with('customers')
+                ->join('customers', 'invoices.customer_id', '=', 'customers.id')
+                ->select('invoices.*', 'customers.name')
+                ->orderBy($orderBy, $orderType)
+                ->paginate(10);
         }
 
         // append order query
         if ($orderBy != 'created_at') {
-            $payments->appends([
+            $invoices->appends([
                 'orderBy'   => $orderBy,
                 'orderType' => $orderType
             ]);
         }
 
-        return view('payment.index')->with([
-            'payments' => $payments,
+        return view('Invoice.index')->with([
+            'invoices' => $invoices,
             'orderType' => $orderType == 'DESC' ? 'ASC' : 'DESC'
         ]);
     }
@@ -72,31 +72,30 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Payment  $payment
+     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show(Invoice $invoice)
     {
-        $payment = Payment::with("rents", "customers")
-        ->where("id", $payment->id)
-        ->first();
+        $invoice = Invoice::with("rents", "customers")
+            ->where("id", $invoice->id)
+            ->first();
 
-        return view("payment.show")->with("payment", $payment);
+        return view("invoice.show")->with("invoice", $invoice);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Payment  $payment
+     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit(Payment $payment)
+    public function edit(Invoice $invoice)
     {
         //
     }
@@ -105,27 +104,26 @@ class PaymentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Payment  $payment
+     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payment $payment)
+    public function update(Request $request, Invoice $invoice)
     {
-        $payment = Payment::find($payment->id);
-        $payment->status = 'lunas';
-        $payment->save();
+        $invoice = Invoice::find($invoice->id);
+        $invoice->status = 'paid';
+        $invoice->save();
 
         Alert::success('Berhasil', 'Pembayaran telah dikonfirmasi');
-        return redirect()->route('pending_show', $payment->rents->id);
+        return redirect()->route('pending_show', $invoice->rents->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Payment  $payment
+     * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $payment)
+    public function destroy(Invoice $invoice)
     {
-
     }
 }

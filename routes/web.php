@@ -46,13 +46,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'is_admin'], function () {
     Route::delete('rent/pending/{id}', 'RentController@pending_destroy')->name('pending_destroy');
 
     // on rent
-    Route::get('rent/jalan', 'RentController@index')->name('rent_index');
-    Route::get('rent/jalan/{id}', 'RentController@rent_show')->name('rent_show');
-    Route::post('rent/jalan/{id}', 'RentController@rent_update')->name('rent_update');
+    Route::get('rent/onloan', 'RentController@index')->name('rent_index');
+    Route::get('rent/onloan/{id}', 'RentController@rent_show')->name('rent_show');
+    Route::post('rent/onloan/{id}', 'RentController@rent_update')->name('rent_update');
 
     // Returned rent
-    Route::get('rent/kembali', 'RentController@index')->name('return_index');
-    Route::get('rent/kembali/{id}', 'RentController@rent_show')->name('return_info');
+    Route::get('rent/completed', 'RentController@index')->name('return_index');
+    Route::get('rent/completed/{id}', 'RentController@rent_show')->name('return_info');
 
     // Checkout rent
     Route::get("rent/checkout/{id}", "RentController@checkout")->name("checkout_rent");
@@ -63,8 +63,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'is_admin'], function () {
     // Driver route
     Route::resource('driver', 'DriverController');
 
-    // Payment route
-    Route::resource('payment', 'PaymentController');
+    // Invoice route
+    Route::resource('invoice', 'InvoiceController');
 
     // Armada route
     Route::resource('armada', 'ArmadaController');

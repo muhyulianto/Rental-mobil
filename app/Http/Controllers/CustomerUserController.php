@@ -15,7 +15,7 @@ class CustomerUserController extends Controller
      */
     public function index()
     {
-        $customer = Customer::where('id_user', Auth::user()->id)->first();
+        $customer = Customer::where('user_id', Auth::user()->id)->first();
 
         return view('user.indexCustomer')->with([
             'customer' => $customer
@@ -40,14 +40,14 @@ class CustomerUserController extends Controller
      */
     public function store(Request $request)
     {
-        $id_user = Auth::user()->id;
+        $user_id = Auth::user()->id;
 
         $customer = new Customer;
-        $customer->id_user = $id_user;
-        $customer->nama = $request->nama;
-        $customer->nomor_ktp = $request->nomor_ktp;
-        $customer->nomor_telepon = $request->nomor_telepon;
-        $customer->alamat = $request->alamat;
+        $customer->user_id = $user_id;
+        $customer->name = $request->name;
+        $customer->id_card_number = $request->id_card_number;
+        $customer->name = $request->name;
+        $customer->address = $request->address;
         $customer->save();
 
         return redirect()->route('CustomerUser.index');
@@ -72,7 +72,7 @@ class CustomerUserController extends Controller
      */
     public function edit($id)
     {
-        $customer = Customer::where('id_user', Auth::user()->id)->first();
+        $customer = Customer::where('user_id', Auth::user()->id)->first();
 
         return view('user.editCustomer')->with([
             'customer' => $customer
@@ -89,10 +89,10 @@ class CustomerUserController extends Controller
     public function update(Request $request, $id)
     {
         $customer = Customer::find($id);
-        $customer->nama = $request->nama;
-        $customer->nomor_ktp = $request->nomor_ktp;
-        $customer->nomor_telepon = $request->nomor_telepon;
-        $customer->alamat = $request->alamat;
+        $customer->name = $request->name;
+        $customer->id_card_number = $request->id_card_number;
+        $customer->name = $request->name;
+        $customer->address = $request->address;
         $customer->save();
 
         return redirect()->route('CustomerUser.index');

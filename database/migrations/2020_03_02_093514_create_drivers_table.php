@@ -15,11 +15,11 @@ class CreateDriversTable extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('driver_name');
-            $table->string('driver_age');
-            $table->string('driver_address');
-            $table->enum('driver_status', ['tersedia', 'jalan'])->default('tersedia');
-            $table->string('driver_phone');
+            $table->string('name');
+            $table->string('age');
+            $table->string('address');
+            $table->enum('status', ['available', 'unavailable'])->default('available');
+            $table->string('phone_number');
             $table->timestamps();
         });
     }

@@ -7,116 +7,135 @@ use Carbon\Carbon;
 
 class Rent extends Model
 {
-    
+
     protected $fillable = [
-        'id_customer', 'id_mobil', 'id_armada', 'tipe_peminjaman', 'id_driver', 'mulai_sewa', 'lama_sewa', 'habis_sewa', 'lokasi_penjemputan'
+        'customer_id', 'car_id', 'id_armada', 'services_type', 'driver_id', 'start_date', 'duration', 'end_date', 'pickup_location'
     ];
-    
+
     /**
      * 
      * RELATIONSHIP
      *
      */
-    public function customers() {
-        return $this->hasOne('App\Customer', 'id', 'id_customer');
+    public function customers()
+    {
+        return $this->hasOne('App\Customer', 'id', 'customer_id');
     }
 
-    public function cars() {
-        return $this->hasOne('App\Car', 'id', 'id_mobil');
+    public function cars()
+    {
+        return $this->hasOne('App\Car', 'id', 'car_id');
     }
 
-    public function drivers() {
-        return $this->hasOne('App\Driver', 'id', 'id_driver');
+    public function drivers()
+    {
+        return $this->hasOne('App\Driver', 'id', 'driver_id');
     }
 
-    public function armadas() {
+    public function armadas()
+    {
         return $this->hasOne('App\Armada', 'id', 'id_armada');
     }
 
-    
+
     /**
      * 
      * MUTATOR
      *
      */
-    public function getFormatMulaiSewaAttribute() {
-        return Carbon::parse($this->mulai_sewa)->format('j F Y');
+    public function getFormatStartDateAttribute()
+    {
+        return Carbon::parse($this->start_date)->format('j F Y');
     }
 
-    public function getFormatLamaSewaAttribute() {
-        return $this->lama_sewa." Hari";
+    public function getFormatDurationAttribute()
+    {
+        return $this->duration . " Days";
     }
 
-    public function getFormatHabisSewaAttribute() {
-        return Carbon::parse($this->habis_sewa)->format('j F Y');
+    public function getFormatEndDateAttribute()
+    {
+        return Carbon::parse($this->end_date)->format('j F Y');
     }
 
-    public function getFormatTipePeminjamanAttribute() {
-        $text = ($this->tipe_peminjaman == 3 ? 'Mobil, Sopir dan Bahan bakar' : ($this->tipe_peminjaman == 2 ? 'Mobil dan Sopir' : 'Hanya mobil'));
+    public function getFormatServicesTypeAttribute()
+    {
+        $text = ($this->services_type == 3 ? 'Car, Driver and Fuel' : ($this->services_type == 2 ? 'Car and Driver' : 'Car'));
 
         return $text;
     }
 
-    public function getNamaLengkapMobilAttribute() {
-        return "{$this->cars->merk_mobil} {$this->cars->nama_mobil}";
+    public function getNamaLengkapMobilAttribute()
+    {
+        return "{$this->cars->brand} {$this->cars->name}";
     }
 
-    public function getLokasiGambarMobilAttribute() {
-        return "images/{$this->cars->gambar}";
+    public function getLokasiGambarMobilAttribute()
+    {
+        return "images/{$this->cars->image}";
     }
 
-    public function getLokasiGambarUserAttribute() {
+    public function getLokasiGambarUserAttribute()
+    {
         return "images/{$this->users->profile}";
     }
 
-    public function getHargaMobilAttribute() {
-        return $this->cars->harga * $this->lama_sewa;
+    public function getCarPriceAttribute()
+    {
+        return $this->cars->price * $this->duration;
     }
 
-    public function getFormatHargaMobilAttribute() {
-        return "Rp.".$this->harga_mobil.",-";
+    public function getFormatCarPriceAttribute()
+    {
+        return "Rp." . $this->car_price . ",-";
     }
 
-    public function getHargaDriverAttribute() {
-        if ($this->tipe_peminjaman == 2 || $this->tipe_peminjaman == 3) {
-            $harga_driver = $this->lama_sewa * 100000;
-            return $harga_driver;
+    public function getDriverPriceAttribute()
+    {
+        if ($this->services_type == 2 || $this->services_type == 3) {
+            $price_driver = $this->duration * 100000;
+            return $price_driver;
         }
 
         return 0;
     }
 
-    public function getFormatHargaDriverAttribute() {
-        if ($this->harga_driver != 0) {
-            return "Rp.{$this->harga_driver},-";
+    public function getFormatDriverPriceAttribute()
+    {
+        if ($this->driver_price != 0) {
+            return "Rp.{$this->driver_price},-";
         }
 
         return "-";
     }
 
-    public function getHargaBahanBakarAttribute() {
-        if ($this->tipe_peminjaman == 3) {
-            $harga_bahan_bakar = $this->lama_sewa * 100000;
-            return $harga_bahan_bakar;
+    public function getFuelPriceAttribute()
+    {
+        if ($this->services_type == 3) {
+            $fuel_price = $this->duration * 100000;
+            return $fuel_price;
         }
 
         return 0;
     }
 
-    public function getFormatHargaBahanBakarAttribute() {
-        if ($this->harga_bahan_bakar != 0) {
-            return "Rp.{$this->harga_bahan_bakar},-";
+    public function getFormatFuelPriceAttribute()
+    {
+        if ($this->fuel_price != 0) {
+            return "Rp.{$this->fuel_price},-";
         }
 
         return "-";
     }
 
-    public function getTotalHargaAttribute() {
-        $harga = $this->harga_mobil + $this->harga_driver + $this->harga_bahan_bakar;
-        return $harga;
+    public function getTotalPriceAttribute()
+    {
+        $price = $this->car_price + $this->dirver_price + $this->fuel_price;
+        return $price;
     }
 
-    public function getFormatTotalHargaAttribute() {
-        return "Rp.".$this->total_harga.",-";
+    public function getFormatTotalPriceAttribute()
+    {
+        return "Rp." . $this->total_price . ",-";
     }
 }

@@ -18,20 +18,20 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label for="nama">Nama customer</label>
-                        <input type="text" name="nama" id="nama" class="form-control" placeholder="" aria-describedby="nama" value="{{ $customer->nama }}">
+                        <label for="name">Nama customer</label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="name" value="{{ $customer->name }}">
                     </div>
                     <div class="form-group">
-                        <label for="nomor_ktp">Nomor ktp</label>
-                        <input type="text" name="nomor_ktp" id="nomor_ktp" class="form-control" placeholder="" aria-describedby="nama" value="{{ $customer->nomor_ktp }}">
+                        <label for="id_card_number">Nomor ktp</label>
+                        <input type="text" name="id_card_number" id="id_card_number" class="form-control" placeholder="" aria-describedby="name" value="{{ $customer->id_card_number }}">
                     </div>
                     <div class="form-group">
-                        <label for="nomor_telepon">Nomor telepon</label>
-                        <input type="text" name="nomor_telepon" id="nomor_telepon" class="form-control" placeholder="" aria-describedby="nama" value="{{ $customer->nomor_telepon }}">
+                        <label for="phone_number">Nomor telepon</label>
+                        <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="" aria-describedby="name" value="{{ $customer->name }}">
                     </div>
                     <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <textarea name="alamat" id="alamat" class="form-control">{{ $customer->alamat }}</textarea>
+                        <label for="address">Alamat</label>
+                        <textarea name="address" id="address" class="form-control">{{ $customer->address }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-upload    "></i>

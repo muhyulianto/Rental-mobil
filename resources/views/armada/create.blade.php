@@ -11,20 +11,20 @@
             <div class="modal-body">
                 <form action="{{ route("armada.store") }}" method="post">
                     <div class="form-group">
-                        <label for="id_mobil">Mobil</label>
-                        <select class="form-control selectpicker" data-live-search="true" data-size="5" title=". . ." name="id_mobil" id="id_mobil">
+                        <label for="car_id">Mobil</label>
+                        <select class="form-control selectpicker" data-live-search="true" data-size="5" title=". . ." name="car_id" id="car_id">
                             <option selected disabled></option>
                             @foreach ($cars as $car)
                             <option value="{{ $car->id }}">
-                                {{ $car->nama_mobil }}
+                                {{ $car->name }}
                             </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="nomor_plat">Nomor plat</label>
-                        <input type="text" name="nomor_plat" id="nomor_plat" class="form-control" placeholder="" aria-describedby="nomor_plat_help" autocomplete="off" required>
-                        <small id="nomor_plat_help" class="text-muted"></small>
+                        <label for="license_plate">Nomor plat</label>
+                        <input type="text" name="license_plate" id="license_plate" class="form-control" placeholder="" aria-describedby="license_plate_help" autocomplete="off" required>
+                        <small id="license_plate_help" class="text-muted"></small>
                     </div>
                     <button type="submit" class="btn btn-primary">Tambahkan</button>
                 </form>

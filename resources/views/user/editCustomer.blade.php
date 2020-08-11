@@ -10,20 +10,20 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="nama">Nama lengkap</label>
-                                <input type="text" name="nama" value="{{ $customer->nama }}" id="nama" class="form-control" placeholder="" aria-describedby="nama">
+                                <label for="name">Nama lengkap</label>
+                                <input type="text" name="name" value="{{ $customer->name }}" id="name" class="form-control" placeholder="" aria-describedby="name">
                             </div>
                             <div class="form-group">
-                                <label for="nomor_ktp">Nomor ktp</label>
-                                <input type="text" name="nomor_ktp" value="{{ $customer->nomor_ktp }}" id="nomor_ktp" class="form-control" placeholder="" aria-describedby="nomor_ktp">
+                                <label for="id_card_number">Nomor ktp</label>
+                                <input type="text" name="id_card_number" value="{{ $customer->id_card_number }}" id="id_card_number" class="form-control" placeholder="" aria-describedby="id_card_number">
                             </div>
                             <div class="form-group">
-                                <label for="nomor_telepon">Nomor telepon</label>
-                                <input type="text" name="nomor_telepon" value="{{ $customer->nomor_telepon }}" id="nomor_telepon" class="form-control" placeholder="" aria-describedby="nomor_telepon">
+                                <label for="name">Nomor telepon</label>
+                                <input type="text" name="name" value="{{ $customer->name }}" id="name" class="form-control" placeholder="" aria-describedby="name">
                             </div>
                             <div class="form-group">
-                                <label for="alamat">Alamat</label>
-                                <textarea name="alamat" class="form-control" id="alamat">{{ $customer->alamat }}</textarea>
+                                <label for="address">Alamat</label>
+                                <textarea name="address" class="form-control" id="address">{{ $customer->address }}</textarea>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Simpan</button>

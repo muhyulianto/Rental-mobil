@@ -25,7 +25,7 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'driver_name',
+                                'orderBy'   => 'name',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 NAMA DRIVER
@@ -34,7 +34,7 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'driver_age',
+                                'orderBy'   => 'age',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 UMUR DRIVER
@@ -43,7 +43,7 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'driver_address',
+                                'orderBy'   => 'address',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 ALAMAT DRIVER
@@ -52,7 +52,7 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'driver_status',
+                                'orderBy'   => 'status',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 STATUS
@@ -61,14 +61,14 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'driver_phone',
+                                'orderBy'   => 'phone_number',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 NOMOR TELEPON
                                 <i class="fas fa-sort"></i>
                             </a>
                         </th>
-                        <th class="text-right">Aksi</th>
+                        <th class="text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,19 +78,19 @@
                             {{ $key + 1 }}
                         </td>
                         <td>
-                            {{ $driver->driver_name }}
+                            {{ $driver->name }}
                         </td>
                         <td>
-                            {{ $driver->format_driver_age }}
+                            {{ $driver->format_age }}
                         </td>
                         <td>
-                            {{ $driver->driver_address }}
+                            {{ $driver->address }}
                         </td>
                         <td>
-                            {{ $driver->driver_status }}
+                            {{ $driver->status }}
                         </td>
                         <td>
-                            {{ $driver->driver_phone }}
+                            {{ $driver->phone_number }}
                         </td>
                         <td class="text-right">
                             <a href="{{ route("driver.edit", $driver->id) }}" type="button" class="btn btn-primary btn-sm">

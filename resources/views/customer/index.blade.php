@@ -22,7 +22,7 @@
                         <th>NO</th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'nama',
+                                'orderBy'   => 'name',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 NAMA
@@ -31,7 +31,7 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'nomor_ktp',
+                                'orderBy'   => 'id_card_number',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 NOMOR KTP
@@ -40,7 +40,7 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'nomor_telepon',
+                                'orderBy'   => 'name',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 NOMOR TELEPON
@@ -54,9 +54,9 @@
                 @forelse ($customers as $key => $customer)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td>{{ $customer->nama }}</td>
-                        <td>{{ $customer->nomor_ktp }}</td>
-                        <td>{{ $customer->nomor_telepon }}</td>
+                        <td>{{ $customer->name }}</td>
+                        <td>{{ $customer->id_card_number }}</td>
+                        <td>{{ $customer->phone_number }}</td>
                         <td class="text-right">
                             <a href="{{ route('customer.edit', $customer->id) }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-pencil-alt    "></i>

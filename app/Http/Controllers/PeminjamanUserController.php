@@ -8,7 +8,7 @@ use Notification;
 use App\User;
 use App\Car;
 use App\Rent;
-use App\Payment;
+use App\Invoice;
 use App\Customer;
 use App\Notifications\KonfirmasiPembayaran;
 use Carbon\Carbon;
@@ -17,13 +17,14 @@ use Illuminate\Support\Facades\Storage;
 
 class PeminjamanUserController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $user = User::with('customers')->find(Auth::user()->id);
 
         if (!empty($user->customers)) {
-            $rents = Rent::where('id_customer', $user->customers->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
+            $rents = Rent::where('customer_id', $user->customers->id)
+                ->orderBy('created_at', 'desc')
+                ->get();
         } else {
             $rents = [];
         }
@@ -33,23 +34,25 @@ class PeminjamanUserController extends Controller
         ]);
     }
 
-    public function bayar($id) {
-        $payment = Payment::find($id);
-        return view('user.bayar')->with('payment', $payment);
+    public function bayar($id)
+    {
+        $invoice = Invoice::find($id);
+        return view('user.bayar')->with('Invoice', $invoice);
     }
 
-    public function konfirmasi(Request $request, $id) {
+    public function konfirmasi(Request $request, $id)
+    {
         if ($request->hasFile("bukti")) {
-            $nama_gambar = time().'.'.$request->file('bukti')->getClientOriginalExtension();
+            $nama_gambar = time() . '.' . $request->file('bukti')->getClientOriginalExtension();
             Storage::putFileAs("public/bukti", $request->file('bukti'), $nama_gambar);
-        } 
+        }
 
-        $payment = Payment::find($id);
-        $payment->bukti_pembayaran = $nama_gambar;
-        $payment->save();
+        $invoice = Invoice::find($id);
+        $invoice->payment_proof = $nama_gambar;
+        $invoice->save();
 
         $admin = User::where('is_admin', 1)->first();
-        Notification::send($admin, new KonfirmasiPembayaran($payment));
+        Notification::send($admin, new KonfirmasiPembayaran($invoice));
 
         Alert::success('Berhasil', 'Mohon tunggu sampai admin mengkonfirmasi');
         return redirect()->route('rentUser.index');
@@ -66,7 +69,8 @@ class PeminjamanUserController extends Controller
         ]);
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $rent = Rent::find($id);
 
         return view('user.rentDetail')->with([
@@ -81,21 +85,21 @@ class PeminjamanUserController extends Controller
      */
     public function store_rent(Request $request)
     {
-        $cars = Car::where('id', $request->id_mobil)->first();
-        $tipe_harga = ($request->tipe_peminjaman == 3 ? 200000 : ($request->tipe_peminjaman == 2 ? 100000 : 0));
-        $harga = (intval($cars->harga) + $tipe_harga) * intval($request->lama_sewa);
-        $habis_sewa = Carbon::parse($request->mulai_sewa)->addDay($request->lama_sewa);
+        $cars = Car::where('id', $request->car_id)->first();
+        $tipe_price = ($request->services_type == 3 ? 200000 : ($request->services_type == 2 ? 100000 : 0));
+        $price = (intval($cars->price) + $tipe_price) * intval($request->duration);
+        $end_date = Carbon::parse($request->start_date)->addDay($request->duration);
 
         // BUAT PESANAN
         if ($request->create == "1") {
             $rent = new Rent;
-            $rent->id_customer = $request->id_customer;
-            $rent->id_mobil = $request->id_mobil;
-            $rent->tipe_peminjaman = $request->tipe_peminjaman;
-            $rent->mulai_sewa = $request->mulai_sewa;
-            $rent->lama_sewa = $request->lama_sewa;
-            $rent->habis_sewa = $habis_sewa;
-            $rent->lokasi_penjemputan = $request->lokasi_penjemputan;
+            $rent->customer_id = $request->customer_id;
+            $rent->car_id = $request->car_id;
+            $rent->services_type = $request->services_type;
+            $rent->start_date = $request->start_date;
+            $rent->duration = $request->duration;
+            $rent->end_date = $end_date;
+            $rent->pickup_location = $request->pickup_location;
             $rent->status = 'pending';
             $rent->save();
 
@@ -103,7 +107,7 @@ class PeminjamanUserController extends Controller
             return redirect()->route('rentUser.index');
         }
 
-        // cek harga dengan mengembalikan nilai harga
-        return back()->withInput()->with('harga', $harga);
+        // cek price dengan mengembalikan nilai price
+        return back()->withInput()->with('price', $price);
     }
 }

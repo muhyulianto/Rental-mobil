@@ -24,16 +24,16 @@ class ArmadaController extends Controller
         $cars = Car::all();
 
         if ($request->has('search_query')) {
-            $armadas = Armada::join('cars', 'armadas.id_mobil', '=', 'cars.id')
-            ->select('armadas.*', \DB::raw('CONCAT_WS(" ", merk_mobil, nama_mobil) as nama_mobil'))
-            ->where(\DB::raw('CONCAT_WS(" ", merk_mobil, nama_mobil)'), 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('nomor_plat', 'LIKE', '%'.$request->search_query.'%')
+            $armadas = Armada::join('cars', 'armadas.car_id', '=', 'cars.id')
+            ->select('armadas.*', \DB::raw('CONCAT_WS(" ", brand, name) as name'))
+            ->where(\DB::raw('CONCAT_WS(" ", brand, name)'), 'LIKE', '%'.$request->search_query.'%')
+            ->orWhere('license_plate', 'LIKE', '%'.$request->search_query.'%')
             ->orWhere('status', 'LIKE', '%'.$request->search_query.'%')
             ->orderBy($orderBy, $orderType)
             ->paginate(10);
         } else {
-            $armadas = Armada::join('cars', 'armadas.id_mobil', '=', 'cars.id')
-            ->select('armadas.*', \DB::raw('CONCAT(merk_mobil," ",nama_mobil) as nama_mobil'))
+            $armadas = Armada::join('cars', 'armadas.car_id', '=', 'cars.id')
+            ->select('armadas.*', \DB::raw('CONCAT(brand," ",name) as name'))
             ->orderBy($orderBy, $orderType)
             ->paginate(10);
         }
@@ -117,7 +117,7 @@ class ArmadaController extends Controller
     public function update(Request $request, Armada $armada)
     {
         $armada = Armada::find($armada->id);
-        $armada->nomor_plat = $request->nomor_plat;
+        $armada->license_plate = $request->license_plate;
         $armada->save();
 
         Alert::success('Berhasil', 'Data telah diperbarui!');

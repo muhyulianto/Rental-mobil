@@ -14,31 +14,31 @@
                     <div class="form-row">
                         <div class="form-group col-lg-4">
                             <label for="">Tipe mobil</label>
-                            <input type="text" class="form-control" name="jenis_mobil" id="" aria-describedby="helpId" placeholder="" required>
+                            <input type="text" class="form-control" name="type" id="" aria-describedby="helpId" placeholder="" required>
                             <small class="text-muted">
                                 Contoh: MPV, Sedan dll.
                             </small>
                         </div>
                         <div class="form-group col-lg-4">
                             <label for="">Merk mobil</label>
-                            <input type="text" class="form-control" name="merk_mobil" id="" aria-describedby="helpId" placeholder="" required>
+                            <input type="text" class="form-control" name="brand" id="" aria-describedby="helpId" placeholder="" required>
                         </div>
                         <div class="form-group col-lg-4">
-                            <label for="">Nama mobil</label>
-                            <input type="text" class="form-control" name="nama_mobil" id="" aria-describedby="helpId" placeholder="" required>
+                            <label for="">Car Name</label>
+                            <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="">Bahan bakar</label>
-                        <input type="text" class="form-control" name="bahan_bakar" id="" aria-describedby="helpId" placeholder="" required>
+                        <input type="text" class="form-control" name="fuel" id="" aria-describedby="helpId" placeholder="" required>
                     </div>
                     <div class="form-group">
                         <label for="">Harga sewa</label>
-                        <input type="number" class="form-control" name="harga" id="" aria-describedby="helpId" placeholder="" required>
+                        <input type="number" class="form-control" name="price" id="" aria-describedby="helpId" placeholder="" required>
                     </div>
                     <div class="form-group">
-                        <label for="gambar">Gambar mobil</label>
-                        <input type="file" name="gambar" class="form-control-file" id="gambar">
+                        <label for="image">Gambar mobil</label>
+                        <input type="file" name="image" class="form-control-file" id="image">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

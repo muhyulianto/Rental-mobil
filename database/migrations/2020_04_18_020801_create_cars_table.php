@@ -15,12 +15,12 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('jenis_mobil');
-            $table->string('nama_mobil');
-            $table->string('merk_mobil');
-            $table->string('gambar');
-            $table->string('bahan_bakar');
-            $table->string('harga');
+            $table->string('type');
+            $table->string('name');
+            $table->string('brand');
+            $table->string('image');
+            $table->string('fuel');
+            $table->string('price');
             $table->timestamps();
         });
     }

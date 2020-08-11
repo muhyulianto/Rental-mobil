@@ -12,22 +12,21 @@ use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(Rent::class, function (Faker $faker) {
-    
-    $id_mobil = Car::all()->random()->id;
-    $mobil = Car::where('id', $id_mobil)->first();
-    $tipe_peminjaman = $faker->numberBetween($min = 1, $max = 3);
-    $mulai_sewa = $faker->dateTimeBetween($startDate = '-3 days', $endDate = 'now', $timezone = null);
-    $lama_sewa = $faker->numberBetween($min = 1, $max = 7);
+
+    $car_id = Car::all()->random()->id;
+    $mobil = Car::where('id', $car_id)->first();
+    $services_type = $faker->numberBetween($min = 1, $max = 3);
+    $start_date = $faker->dateTimeBetween($startDate = '-3 days', $endDate = 'now', $timezone = null);
+    $duration = $faker->numberBetween($min = 1, $max = 7);
 
     return [
-        'id_customer'           => Customer::all()->random()->id,
-        'id_mobil'              => $id_mobil,
-        'tipe_peminjaman'       => $tipe_peminjaman,
-        'mulai_sewa'            => $mulai_sewa,
-        'lama_sewa'             => $lama_sewa,
-        'habis_sewa'            => Carbon::parse($mulai_sewa)->addDay($lama_sewa),
-        'lokasi_penjemputan'    => ($tipe_peminjaman == 1 ? '-' : $faker->address),
+        'customer_id'           => Customer::all()->random()->id,
+        'car_id'              => $car_id,
+        'services_type'       => $services_type,
+        'start_date'            => $start_date,
+        'duration'             => $duration,
+        'end_date'            => Carbon::parse($start_date)->addDay($duration),
+        'pickup_location'    => ($services_type == 1 ? '-' : $faker->address),
         'status'                => 'pending',
     ];
-
 });

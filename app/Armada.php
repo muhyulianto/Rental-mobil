@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Armada extends Model
 {
     protected $fillable = [
-        'id_mobil', 'nomor_plat'
+        'car_id', 'license_plate'
     ];
     
     /**
@@ -16,7 +16,7 @@ class Armada extends Model
      * 
      */
     public function cars() {
-        return $this->hasOne('App\Car', 'id', 'id_mobil');
+        return $this->hasOne('App\Car', 'id', 'car_id');
     }
     
     /**
@@ -24,7 +24,7 @@ class Armada extends Model
      * MUTATOR
      *
      */
-    public function getFormatNamaMobilAttribute() {
-        return $this->cars->merk_mobil." ".$this->cars->nama_mobil;
+    public function getFormatNameAttribute() {
+        return $this->cars->brand." ".$this->cars->name;
     }
 }

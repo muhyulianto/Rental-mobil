@@ -10,9 +10,9 @@ $factory->define(Customer::class, function (Faker $faker) {
     $faker->addProvider(new \Faker\Provider\id_ID\Person($faker));
 
     return [
-        'nomor_ktp'     => $faker->nik(),
-        'nama'          => $faker->name,
-        'nomor_telepon' => '+628' . $faker->randomNumber($nbDigits = 9, $strict = false),
-        'alamat'        => $faker->address
+        'id_card_number'    => $faker->nik(),
+        'name'              => $faker->name,
+        'phone_number'      => '+628' . $faker->randomNumber($nbDigits = 9, $strict = false),
+        'address'           => $faker->address
     ];
 });

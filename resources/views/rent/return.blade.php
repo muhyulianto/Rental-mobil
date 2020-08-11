@@ -14,8 +14,8 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Mobil</th>
-                                    <th>Mulai sewa</th>
-                                    <th>Lama sewa</th>
+                                    <th>Start date</th>
+                                    <th>Duration</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -25,8 +25,8 @@
                                 <tr>
                                     <td>{{ $rent->users->name}}</td>
                                     <td>{{ $rent->nama_lengkap_mobil}}</td>
-                                    <td>{{ $rent->format_mulai_sewa }}</td>
-                                    <td>{{ $rent->lama_sewa.' Hari' }}</td>
+                                    <td>{{ $rent->format_start_date }}</td>
+                                    <td>{{ $rent->duration.' Hari' }}</td>
                                     <td> {{ $rent->status }} </td>
                                     <td>
                                         <a href="{{ route('rent.show', $rent->id) }}" type="button" class="btn btn-success btn-sm">View</a>

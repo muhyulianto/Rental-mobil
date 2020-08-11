@@ -6,14 +6,14 @@
         <div class="card">
             <div class="card-header d-flex border-0">
                 <h4 class="card-title my-auto mr-auto">
-                    <a href="{{ route('payment.index') }}" class="mr-3">
+                    <a href="{{ route('invoice.index') }}" class="mr-3">
                         <span class="fa fa-arrow-left text-primary"></span>
                     </a>
                     Detail tagihan
                 </h4>
                 </h4>
-                @if ($payment->rents->status == 'pending')
-                <form class="d-inline" action="{{ route('payment.update', $payment->id) }}" method="post">
+                @if ($invoice->rents->status == 'pending')
+                <form class="d-inline" action="{{ route('invoice.update', $invoice->id) }}" method="post">
                     @csrf
                     @method('PUT')
                     <button type="submit" class="btn btn-primary">
@@ -34,38 +34,38 @@
                         <tr>
                             <td class="w-50">Mobil</td>
                             <td>
-                                {{ $payment->rents->format_harga_mobil }}
+                                {{ $invoice->rents->cars->format_price }}
                             </td>
                             <td>
-                                {{ $payment->rents->format_lama_sewa }}
+                                {{ $invoice->rents->format_duration }}
                             </td>
                             <th class="text-right">
-                                {{ $payment->rents->format_harga_mobil }}
+                                {{ $invoice->rents->format_car_price }}
                             </th>
                         </tr>
-                        @if ($payment->rents->tipe_peminjaman != 1)
+                        @if ($invoice->rents->services_type != 1)
                         <tr>
                             <td class="w-50">Sopir</td>
                             <td>
                                 Rp.100000,-
                             </td>
                             <td>
-                                {{ $payment->rents->format_lama_sewa }}
+                                {{ $invoice->rents->format_duration }}
                             </td>
-                            <th class="text-right">{{ $payment->rents->format_harga_driver }}</th>
+                            <th class="text-right">{{ $invoice->rents->format_driver_price }}</th>
                         <tr>
                         @endif
-                        @if ($payment->rents->tipe_peminjaman == 3)
+                        @if ($invoice->rents->services_type == 3)
                         <tr>
                             <td class="w-50">Bahan bakar</td>
                             <td>
                                 Rp.100000,-
                             </td>
                             <td>
-                                {{ $payment->rents->format_lama_sewa }}
+                                {{ $invoice->rents->format_duration }}
                             </td>
                             <th class="text-right">
-                                {{ $payment->rents->format_harga_bahan_bakar }}
+                                {{ $invoice->rents->format_fuel_price }}
                             </th>
                         </tr>
                         @endif
@@ -74,7 +74,7 @@
                                 Total akhir
                             </td>
                             <th class="text-right border-top">
-                                {{ $payment->rents->format_total_harga }}
+                                {{ $invoice->rents->format_total_price }}
                             </th>
                         </tr>
                     </table>
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="card-body text-center">
-                <img src="{{ asset('storage/bukti/'.$payment->bukti_pembayaran) }}" class="img-fluid text-danger" alt="Pelanggan belum mengupload bukti pembayaran">
+                <img src="{{ asset('storage/bukti/'.$invoice->payment_proof) }}" class="img-fluid text-danger" alt="Pelanggan belum mengupload bukti pembayaran">
             </div>
         </div>
     </div>

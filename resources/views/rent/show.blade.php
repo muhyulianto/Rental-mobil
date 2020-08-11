@@ -16,43 +16,43 @@
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
-                            <td class="text-muted w-50">Nama pelanggan</td>
-                            <th class="text-right">{{ $rent->customers->nama }}</th>
+                            <td class="text-muted w-50">Customer Name</td>
+                            <th class="text-right">{{ $rent->customers->name }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted w-50">Nama mobil</td>
+                            <td class="text-muted w-50">Car Name</td>
                             <th class="text-right">{{ $rent->nama_lengkap_mobil }}</th>
                         </tr>
                         <tr>
                             <td class="text-muted">Nomor plat</td>
-                            <th class="text-right">{{ $rent->armadas->nomor_plat }}</th>
+                            <th class="text-right">{{ $rent->armadas->license_plate }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted">Mulai sewa</td>
-                            <th class="text-right">{{ $rent->format_mulai_sewa }}</th>
+                            <td class="text-muted">Start date</td>
+                            <th class="text-right">{{ $rent->format_start_date }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted">Lama sewa</td>
-                            <th class="text-right">{{ $rent->format_lama_sewa }}</th>
+                            <td class="text-muted">Duration</td>
+                            <th class="text-right">{{ $rent->format_duration }}</th>
                         </tr>
                         <tr>
                             <td class="text-muted">Habis sewa</td>
-                            <th class="text-right">{{ $rent->format_habis_sewa }}</th>
+                            <th class="text-right">{{ $rent->format_end_date }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted">Tipe peminjaman</td>
-                            <th class="text-right">{{ $rent->format_tipe_peminjaman }}</th>
+                            <td class="text-muted">Services Type</td>
+                            <th class="text-right">{{ $rent->format_services_type }}</th>
                         </tr>
-                        @if ($rent->tipe_peminjaman != 1)
+                        @if ($rent->services_type != 1)
                         <tr>
                             <td class="text-muted">Driver</td>
-                            <th class="text-right">{{ $rent->drivers->driver_name }}</th>
+                            <th class="text-right">{{ $rent->drivers->name }}</th>
                         </tr>
                         @endif
-                        @isset($rent->lokasi_penjemputan)
+                        @isset($rent->pickup_location)
                         <tr>
                             <td class="text-muted">Lokasi penjemputan</td>
-                            <th class="text-right">{{ $rent->lokasi_penjemputan }}</th>
+                            <th class="text-right">{{ $rent->pickup_location }}</th>
                         </tr>
                         @endisset
                         <tr>
@@ -63,7 +63,7 @@
                         </tr>
                     </tbody>
                 </table>
-                @if ($rent->status == 'jalan')
+                @if ($rent->status == 'onloan')
                 <form class="mt-4" action="{{ route('rent_update', $rent->id) }}" method="post">
                     @csrf
                     <button class="btn btn-primary" type="submit">

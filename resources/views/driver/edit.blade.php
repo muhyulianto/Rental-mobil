@@ -14,20 +14,20 @@
                     @csrf
                     @method("PUT")
                     <div class="form-group">
-                        <label for="driver_name">Nama driver</label>
-                        <input type="text" class="form-control" name="driver_name" value="{{ $driver->driver_name }}">
+                        <label for="name">Nama driver</label>
+                        <input type="text" class="form-control" name="name" value="{{ $driver->name }}">
                     </div>
                     <div class="form-group">
-                        <label for="driver_age">Umur driver</label>
-                        <input type="text" class="form-control" name="driver_age" value="{{ $driver->driver_age }}">
+                        <label for="age">Umur driver</label>
+                        <input type="text" class="form-control" name="age" value="{{ $driver->age }}">
                     </div>
                     <div class="form-group">
-                        <label for="driver_phone">Nomor telepon</label>
-                        <input class="form-control" type="text" name="driver_phone" value="{{ $driver->driver_phone }}">
+                        <label for="phone_number">Nomor telepon</label>
+                        <input class="form-control" type="text" name="phone_number" value="{{ $driver->phone_number }}">
                     </div>
                     <div class="form-group">
-                        <label for="driver_address">Alamat driver</label>
-                        <textarea class="form-control" name="driver_address">{{ $driver->driver_address }}</textarea>
+                        <label for="address">Alamat driver</label>
+                        <textarea class="form-control" name="address">{{ $driver->address }}</textarea>
                     </div>
                     <button class="btn btn-primary" type="submit">
                         <i class="fas fa-upload    "></i>

@@ -15,9 +15,9 @@ class CreateArmadasTable extends Migration
     {
         Schema::create('armadas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_mobil');
-            $table->string('nomor_plat');
-            $table->enum('status', ['tersedia', 'jalan'])->default('tersedia');
+            $table->integer('car_id');
+            $table->string('license_plate');
+            $table->enum('status', ['available', 'onloan'])->default('available');
             $table->timestamps();
         });
     }

@@ -21,25 +21,25 @@
                             <tr>
                                 <td>Nama</td>
                                 <th class="text-right">
-                                    {{ $customer->nama }}
+                                    {{ $customer->name }}
                                 </th>
                             </tr>
                             <tr>
                                 <td>Nomor ktp</td>
                                 <th class="text-right">
-                                    {{ $customer->nomor_ktp }}
+                                    {{ $customer->id_card_number }}
                                 </th>
                             </tr>
                             <tr>
                                 <td>Nomor telepon</td>
                                 <th class="text-right">
-                                    {{ $customer->nomor_telepon }}
+                                    {{ $customer->name }}
                                 </th>
                             </tr>
                             <tr>
                                 <td>Alamat</td>
                                 <th class="text-right">
-                                    {{ $customer->alamat }}
+                                    {{ $customer->address }}
                                 </th>
                             </tr>
                         </table>

@@ -13,12 +13,12 @@
 				<form action="{{ route('store_rent_admin') }}" method="post" id="store_rent">
 					@csrf
 					<div class="form-group">
-						<label for="id_user">Pilih customer</label>
-						<select class="form-control selectpicker" name="id_customer" data-size="5" data-live-search="true" title=". . ." required>
-							<option disabled {{ (old('id_customer') ? '' : 'selected')}}></option>
+						<label for="user_id">Pilih customer</label>
+						<select class="form-control selectpicker" name="customer_id" data-size="5" data-live-search="true" title=". . ." required>
+							<option disabled {{ (old('customer_id') ? '' : 'selected')}}></option>
 							@forelse ($customers as $customer)
-							<option value="{{ $customer->id }}" {{ (old('id_customer') == $customer->id ? 'selected' : '')}}>
-								{{ $customer->nama }}
+							<option value="{{ $customer->id }}" {{ (old('customer_id') == $customer->id ? 'selected' : '')}}>
+								{{ $customer->name }}
 							</option> 
 							@empty
 							@endforelse
@@ -30,50 +30,50 @@
 						</small>
 					</div>
 					<div class="form-group">
-						<label for="id_mobil">Pilih mobil</label>
-						<select class="form-control selectpicker" name="id_mobil" data-size="5" data-live-search="true" title=". . ." required>
-                            <option disabled {{ (old('id_mobil') ? '' : 'selected')}}></option>
+						<label for="car_id">Pilih mobil</label>
+						<select class="form-control selectpicker" name="car_id" data-size="5" data-live-search="true" title=". . ." required>
+                            <option disabled {{ (old('car_id') ? '' : 'selected')}}></option>
 							@foreach ($cars as $car)
-								<option value="{{ $car->id }}" {{ (old('id_mobil') == $car->id ? 'selected' : '')}}>
+								<option value="{{ $car->id }}" {{ (old('car_id') == $car->id ? 'selected' : '')}}>
 									{{ $car->nama_lengkap_mobil }}
 								</option> 
 							@endforeach
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="tipe_peminjaman">Tipe peminjaman</label>
-						<select class="form-control selectpicker" id="tipe_peminjaman" name="tipe_peminjaman" data-size="5" data-live-search="true" title=". . ." required>
-							<option disabled {{ (old('tipe_peminjaman') ? '' : 'selected')}}></option>
-							<option value="1" {{ (old('tipe_peminjaman') == '1' ? 'selected' : '')}}>Hanya mobil</option>
-							<option value="2" {{ (old('tipe_peminjaman') == '2' ? 'selected' : '')}}>Mobil dan sopir</option>
-							<option value="3" {{ (old('tipe_peminjaman') == '3' ? 'selected' : '')}}>Mobil, sopir dan bahan bakar</option>
+						<label for="services_type">Services Type</label>
+						<select class="form-control selectpicker" id="services_type" name="services_type" data-size="5" data-live-search="true" title=". . ." required>
+							<option disabled {{ (old('services_type') ? '' : 'selected')}}></option>
+							<option value="1" {{ (old('services_type') == '1' ? 'selected' : '')}}>Hanya mobil</option>
+							<option value="2" {{ (old('services_type') == '2' ? 'selected' : '')}}>Mobil dan sopir</option>
+							<option value="3" {{ (old('services_type') == '3' ? 'selected' : '')}}>Mobil, sopir dan bahan bakar</option>
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="">Mulai sewa</label>
-						<input type="date" id="mulai_sewa" name="mulai_sewa" value="{{ old('mulai_sewa') }}" class="form-control pointer" min="2020-04-21" required>
+						<label for="">Start date</label>
+						<input type="date" id="start_date" name="start_date" value="{{ old('start_date') }}" class="form-control pointer" min="2020-04-21" required>
 					</div>
 					<div class="form-group">
-						<label for="lama_sewa">Lama sewa</label>
+						<label for="duration">Duration</label>
 						<div class="input-group">
-							<input type="number" class="form-control" name="lama_sewa" id="lama_sewa" value="{{ old('lama_sewa') }}" min="0" autocomplete="off" required>
+							<input type="number" class="form-control" name="duration" id="duration" value="{{ old('duration') }}" min="0" autocomplete="off" required>
 							<div class="input-group-append">
 								<label class="input-group-text">Hari</label>
 							</div>
 						</div>
 					</div>
-					<div class="form-group" id="lokasi_penjemputan">
-						<label for="lokasi_penjemputan">Lokasi penjemputan</label>
-						<textarea name="lokasi_penjemputan" class="form-control">{{ old('lokasi_penjemputan') }}</textarea>
+					<div class="form-group" id="pickup_location">
+						<label for="pickup_location">Lokasi penjemputan</label>
+						<textarea name="pickup_location" class="form-control">{{ old('pickup_location') }}</textarea>
 						<small id="helpId" class="text-muted">Lokasi penjemputan jika anda menyewa sopir</small>
 					</div>
 					<div class="form-group">
-						<label for="harga">Estimasi harga</label>
+						<label for="price">Estimasi price</label>
 						<div class="input-group">
-							<input name="harga" id="harga" class="form-control" value="{{ session()->get('harga') }}" disabled>
+							<input name="price" id="price" class="form-control" value="{{ session()->get('price') }}" disabled>
 							<div class="input-group-append">
 								<button class="btn btn-primary" name="cek" type="submit" value="0" id="cek_estimasi">
-									Cek harga
+									Cek price
 								</button>
 							</div>
 						</div>

@@ -23,17 +23,17 @@ class CarController extends Controller
 
         if ($request->has('search_query')) {
             $cars = Car::withCount('armadas')
-            ->where('jenis_mobil', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('nama_mobil', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere(\DB::raw('CONCAT(merk_mobil," ",nama_mobil)'), 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('merk_mobil', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('harga', 'LIKE', '%'.$request->search_query.'%')
-            ->orderBy($orderBy, $orderType)
-            ->paginate(10);
+                ->where('type', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('name', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere(\DB::raw('CONCAT(brand," ",name)'), 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('brand', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('price', 'LIKE', '%' . $request->search_query . '%')
+                ->orderBy($orderBy, $orderType)
+                ->paginate(10);
         } else {
             $cars = Car::withCount('armadas')
-            ->orderBy($orderBy, $orderType)
-            ->paginate(10);
+                ->orderBy($orderBy, $orderType)
+                ->paginate(10);
         }
 
         // append order query
@@ -68,20 +68,20 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile("gambar")) {
-            $image_name = time().'.'.$file->getClientOriginalExtension();
-            Storage::putFileAs("public/images", $request->file('gambar'), $image_name);
+        if ($request->hasFile("image")) {
+            $image_name = time() . '.' . $file->getClientOriginalExtension();
+            Storage::putFileAs("public/images", $request->file('image'), $image_name);
         } else {
             $image_name = 'default.jpg';
         }
 
         $car = new Car;
-        $car->jenis_mobil = $request->jenis_mobil;
-        $car->nama_mobil = $request->nama_mobil;
-        $car->merk_mobil = $request->merk_mobil;
-        $car->bahan_bakar = $request->bahan_bakar;
-        $car->harga = $request->harga;
-        $car->gambar = $image_name;
+        $car->type = $request->type;
+        $car->name = $request->name;
+        $car->brand = $request->brand;
+        $car->fuel = $request->fuel;
+        $car->price = $request->price;
+        $car->image = $image_name;
         $car->save();
 
         Alert::success('Berhasil', 'Data telah ditambahkan!');
@@ -122,21 +122,21 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         $car = Car::find($car->id);
-        $file = $request->file('gambar');
-        
-        if ($request->hasFile("gambar")) {
-            $image_name = time().'.'.$file->getClientOriginalExtension();
+        $file = $request->file('image');
+
+        if ($request->hasFile("image")) {
+            $image_name = time() . '.' . $file->getClientOriginalExtension();
             Storage::putFileAs("public/images", $file, $image_name);
         } else {
-            $image_name = $car->gambar;
+            $image_name = $car->image;
         }
 
-        $car->jenis_mobil = $request->jenis_mobil;
-        $car->nama_mobil = $request->nama_mobil;
-        $car->merk_mobil = $request->merk_mobil;
-        $car->bahan_bakar = $request->bahan_bakar;
-        $car->harga = $request->harga;
-        $car->gambar = $image_name;
+        $car->type = $request->type;
+        $car->name = $request->name;
+        $car->brand = $request->brand;
+        $car->fuel = $request->fuel;
+        $car->price = $request->price;
+        $car->image = $image_name;
         $car->save();
 
         Alert::success('Berhasil', 'Data telah diubah!');

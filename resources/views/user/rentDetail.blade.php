@@ -14,32 +14,32 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <img src="{{ asset('storage/images/'.$rent->cars->gambar) }}" class="img-fluid" alt="">
+                        <img src="{{ asset('storage/images/'.$rent->cars->image) }}" class="img-fluid" alt="">
                         <table class="table table-borderless">
                             <tbody>
                                 <tr>
                                     <td class="text-muted w-50">Nama penyewa</td>
-                                    <th class="text-right">{{ $rent->customers->nama }}</th>
+                                    <th class="text-right">{{ $rent->customers->name }}</th>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted w-50">Nama mobil</td>
+                                    <td class="text-muted w-50">Car Name</td>
                                     <th class="text-right">{{ $rent->nama_lengkap_mobil }}</th>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted">Mulai sewa</td>
-                                    <th class="text-right">{{ $rent->format_mulai_sewa }}</th>
+                                    <td class="text-muted">Start date</td>
+                                    <th class="text-right">{{ $rent->format_start_date }}</th>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted">Lama sewa</td>
-                                    <th class="text-right">{{ $rent->format_lama_sewa }}</th>
+                                    <td class="text-muted">Duration</td>
+                                    <th class="text-right">{{ $rent->format_duration }}</th>
                                 </tr>
                                 <tr>
                                     <td class="text-muted">Habis sewa</td>
-                                    <th class="text-right">{{ $rent->format_habis_sewa }}</th>
+                                    <th class="text-right">{{ $rent->format_end_date }}</th>
                                 </tr>
                                 <tr>
-                                    <td class="text-muted">Tipe peminjaman</td>
-                                    <th class="text-right">{{ $rent->format_tipe_peminjaman }}</th>
+                                    <td class="text-muted">Services Type</td>
+                                    <th class="text-right">{{ $rent->format_services_type }}</th>
                                 </tr>
                             </tbody>
                         </table>

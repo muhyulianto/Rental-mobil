@@ -226,14 +226,14 @@ return [
                 [
                     'text'      => 'Disewa',
                     'icon'      => 'fa fa-car-side',
-                    'url'       => 'admin/rent/jalan',
-                    'active'    => ['admin/rent/jalan', 'admin/rent/jalan?*', 'regex:@^admin/rent/jalan/[0-9]+$@']
+                    'url'       => 'admin/rent/onloan',
+                    'active'    => ['admin/rent/onloan', 'admin/rent/onloan?*', 'regex:@^admin/rent/onloan/[0-9]+$@']
                 ],
                 [
                     'text'      => 'Kembali',
                     'icon'      => 'fa fa-check',
-                    'url'       => 'admin/rent/kembali',
-                    'active'    => ['admin/rent/kembali', 'admin/rent/kembali?*', 'regex:@^admin/rent/kembali/[0-9]+$@'],
+                    'url'       => 'admin/rent/completed',
+                    'active'    => ['admin/rent/completed', 'admin/rent/completed?*', 'regex:@^admin/rent/completed/[0-9]+$@'],
                 ]
             ]
         ],
@@ -277,12 +277,12 @@ return [
             ]
         ],
         [
-            'text'      => 'Tagihan',
-            'url'       => 'admin/payment',
+            'text'      => 'Invoice',
+            'url'       => 'admin/invoice',
             'icon'      => 'fa fa-credit-card',
             'active'    => [
-                'admin/payment',
-                'regex:@^admin/payment/[0-9]+$@'
+                'admin/invoice',
+                'regex:@^admin/invoice/[0-9]+$@'
             ]
         ]
     ],

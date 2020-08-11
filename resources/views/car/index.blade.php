@@ -25,7 +25,7 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'jenis_mobil',
+                                'orderBy'   => 'type',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 JENIS MOBIL
@@ -34,7 +34,7 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'merk_mobil',
+                                'orderBy'   => 'brand',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 MERK MOBIL
@@ -43,16 +43,16 @@
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'nama_mobil',
+                                'orderBy'   => 'name',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
-                                NAMA MOBIL
+                                Car Name
                                 <i class="fas fa-sort"></i>
                             </a>
                         </th>
                         <th>
                             <a href="{{ Request::fullUrlWithQuery([
-                                'orderBy'   => 'harga',
+                                'orderBy'   => 'price',
                                 'orderType' => $orderType
                             ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                 HARGA
@@ -68,7 +68,7 @@
                                 <i class="fas fa-sort"></i>
                             </a>
                         </th>
-                        <th style="width: 180px" class="text-right">Aksi</th>
+                        <th style="width: 180px" class="text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,10 +77,10 @@
                         <td>
                             {{ $key + 1 }}
                         </td>
-                        <td scope="row">{{ $car->jenis_mobil }}</td>
-                        <td>{{ $car->merk_mobil }}</td>
-                        <td>{{ $car->nama_mobil }}</td>
-                        <td>{{ $car->format_harga }}</td>
+                        <td scope="row">{{ $car->type }}</td>
+                        <td>{{ $car->brand }}</td>
+                        <td>{{ $car->name }}</td>
+                        <td>{{ $car->format_price }}</td>
                         <td>{{ $car->format_jumlah_armada }}</td>
                         <td class="text-right">
                             <a href="{{ route('car.show', $car->id) }}" class="btn btn-success btn-sm"><span class="fa fa-eye"></span></a>

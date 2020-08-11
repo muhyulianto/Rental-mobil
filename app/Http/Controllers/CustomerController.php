@@ -15,9 +15,9 @@ class CustomerController extends Controller
         $orderType = $request->orderType ? $request->orderType : 'DESC';
 
         if ($request->has('search_query')) {
-            $customers = Customer::where('nama', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('nomor_ktp', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('nomor_telepon', 'LIKE', '%'.$request->search_query.'%')
+            $customers = Customer::where('name', 'LIKE', '%'.$request->search_query.'%')
+            ->orWhere('id_card_number', 'LIKE', '%'.$request->search_query.'%')
+            ->orWhere('name', 'LIKE', '%'.$request->search_query.'%')
             ->orderBy($orderBy, $orderType)
             ->paginate(10);
         } else {
@@ -46,10 +46,10 @@ class CustomerController extends Controller
 
     public function store(Request $request) {
         $customer = new Customer;
-        $customer->nama = $request->nama;
-        $customer->nomor_ktp = $request->nomor_ktp;
-        $customer->nomor_telepon = $request->nomor_telepon;
-        $customer->alamat = $request->alamat;
+        $customer->name = $request->name;
+        $customer->id_card_number = $request->id_card_number;
+        $customer->phone_number = $request->phone_number;
+        $customer->address = $request->address;
         $customer->save();
 
         Alert::success('Berhasil', 'Data telah ditambahkan!');
@@ -66,10 +66,10 @@ class CustomerController extends Controller
 
     public function update(Request $request, Customer $customer) {
         $customer = Customer::find($customer->id);
-        $customer->nama = $request->nama;
-        $customer->nomor_ktp = $request->nomor_ktp;
-        $customer->nomor_telepon = $request->nomor_telepon;
-        $customer->alamat = $request->alamat;
+        $customer->name = $request->name;
+        $customer->id_card_number = $request->id_card_number;
+        $customer->phone_number = $request->phone_number;
+        $customer->address = $request->address;
         $customer->save();
 
         Alert::success('Berhasil', 'Data telah diupdate');

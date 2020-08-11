@@ -18,9 +18,9 @@ class KonfirmasiPembayaran extends Notification
      *
      * @return void
      */
-    public function __construct($payment)
+    public function __construct($invoice)
     {
-        $this->payment = $payment;
+        $this->Invoice = $invoice;
     }
 
     /**
@@ -42,10 +42,10 @@ class KonfirmasiPembayaran extends Notification
      */
     public function toDatabase($notifiable)
     {
-        $customer = Customer::find($this->payment->id_customer);
+        $customer = Customer::find($this->Invoice->customer_id);
         return [
-            'pesan' => $customer->nama . ' Telah mengungggah bukti pembayaran segera konfirmasi pesananya',
-            'data' => $this->payment
+            'pesan' => $customer->name . ' Telah mengungggah bukti pembayaran segera konfirmasi pesananya',
+            'data' => $this->Invoice
         ];
     }
 }

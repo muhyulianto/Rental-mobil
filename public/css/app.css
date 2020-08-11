@@ -40085,7 +40085,7 @@ a.text-muted:hover {
   cursor: pointer;
 }
 
-.card-body > .table-responsive > .table > thead > tr > th {
+.table-responsive > .table > thead > tr > th {
   border-top-width: 0;
 }
 

@@ -15,28 +15,27 @@ class CreateRentsTable extends Migration
     {
         Schema::create('rents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_customer');
-            $table->unsignedBigInteger('id_mobil');
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('id_armada')->nullable();
-            $table->unsignedBigInteger('id_driver')->nullable();
-            $table->integer('tipe_peminjaman');
-            $table->date('mulai_sewa');
-            $table->integer('lama_sewa');
-            $table->date('habis_sewa');
-            $table->string('lokasi_penjemputan')->nullable();
-            $table->enum('status', ['pending', 'jalan', 'kembali'])->default('pending');
-            $table->integer('denda')->default(0);
+            $table->unsignedBigInteger('driver_id')->nullable();
+            $table->integer('services_type');
+            $table->date('start_date');
+            $table->integer('duration');
+            $table->date('end_date');
+            $table->string('pickup_location')->nullable();
+            $table->enum('status', ['pending', 'onloan', 'completed'])->default('pending');
             $table->timestamps();
 
             // Relationship
-            $table->foreign('id_customer')->references('id')
-            ->on('customers')->onDelete('cascade');
-            $table->foreign('id_mobil')->references('id')
-            ->on('cars')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')
+                ->on('customers')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')
+                ->on('cars')->onDelete('cascade');
             $table->foreign('id_armada')->references('id')
-            ->on('armadas')->onDelete('cascade');
-            $table->foreign('id_driver')->references('id')
-            ->on('drivers')->onDelete('cascade');
+                ->on('armadas')->onDelete('cascade');
+            $table->foreign('driver_id')->references('id')
+                ->on('drivers')->onDelete('cascade');
         });
     }
 

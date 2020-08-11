@@ -17,26 +17,26 @@
                                     Nomor tagihan
                                 </td>
                                 <th class="text-right">
-                                    {{ $payment->nomor_tagihan }}
+                                    {{ $invoice->invoice_number }}
                                 </th>
                             </tr>
                             <tr>
                                 <td class="w-50">Mobil</td>
                                 <th class="text-right">
-                                    {{ $payment->rents->format_harga_mobil }}
+                                    {{ $invoice->rents->format_price_mobil }}
                                 </th>
                             </tr>
-                            @if ($payment->rents->tipe_peminjaman != 1)
+                            @if ($invoice->rents->services_type != 1)
                             <tr>
                                 <td class="w-50">Sopir</td>
-                                <th class="text-right">{{ $payment->rents->format_harga_driver }}</th>
+                                <th class="text-right">{{ $invoice->rents->format_price_driver }}</th>
                             <tr>
                             @endif
-                            @if ($payment->rents->tipe_peminjaman == 3)
+                            @if ($invoice->rents->services_type == 3)
                             <tr>
                                 <td class="w-50">Bahan bakar</td>
                                 <th class="text-right">
-                                    {{ $payment->rents->format_harga_bahan_bakar }}
+                                    {{ $invoice->rents->format_price_fuel }}
                                 </th>
                             </tr>
                             @endif
@@ -45,7 +45,7 @@
                                     Total
                                 </td>
                                 <th class="text-right border-top">
-                                    {{ $payment->rents->format_total_harga }}
+                                    {{ $invoice->rents->format_total_price }}
                                 </th>
                             </tr>
                         </table>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('rentUser.konfirmasi', $payment->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('rentUser.konfirmasi', $invoice->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                               <input type="file" class="form-control-file" name="bukti" id="bukti" placeholder="" aria-describedby="buktiHelp" required>

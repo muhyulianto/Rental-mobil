@@ -18,6 +18,6 @@ class ReadNotificationController extends Controller
         $user = User::where('is_admin', 1)->first()->unreadNotifications;
         $user->where('id', $id)->markAsRead();
 
-        return redirect()->route('payment.show', $request->id_payment);
+        return redirect()->route('Invoice.show', $request->id_Invoice);
     }
 }

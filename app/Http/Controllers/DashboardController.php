@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-   public function index() {
+    public function index()
+    {
         $user = User::where('is_admin', 1)->first()->unreadNotifications;
         return view('adminDashboard')->with([
             'notifications' => $user
         ]);
-   } 
+    }
 }

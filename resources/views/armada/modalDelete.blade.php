@@ -11,7 +11,7 @@
                 Apa anda yakin ingin menghapus data ini?
             </div>
             <div class="modal-footer border-0">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                <j type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</j>
                 <form action="{{ route('armada.destroy', $armada->id) }}" method="post" class="d-inline">
                     @csrf
                     @method("DELETE")

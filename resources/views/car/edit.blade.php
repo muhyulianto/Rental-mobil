@@ -15,27 +15,27 @@
                 @method('PATCH')
                 <div class="form-group">
                 <label for="">Jenis mobil</label>
-                <input type="text" class="form-control" name="jenis_mobil" value="{{ $car->jenis_mobil }}" placeholder="">
+                <input type="text" class="form-control" name="type" value="{{ $car->type }}" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="">Nama mobil</label>
-                    <input type="text" class="form-control" name="nama_mobil" value="{{ $car->nama_mobil }}" placeholder="">
+                    <label for="">Car Name</label>
+                    <input type="text" class="form-control" name="name" value="{{ $car->name }}" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="">Merk mobil</label>
-                    <input type="text" class="form-control" name="merk_mobil" value="{{ $car->merk_mobil }}" placeholder="">
+                    <input type="text" class="form-control" name="brand" value="{{ $car->brand }}" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="">Bahan bakar</label>
-                    <input type="text" class="form-control" name="bahan_bakar" value="{{ $car->bahan_bakar }}" placeholder="">
+                    <input type="text" class="form-control" name="fuel" value="{{ $car->fuel }}" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="">Harga sewa</label>
-                    <input type="text" class="form-control" name="harga" value="{{ $car->harga }}" placeholder="">
+                    <input type="text" class="form-control" name="price" value="{{ $car->price }}" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="">Gambar</label>
-                    <input type="file" class="form-control-file" name="gambar" value="{{ $car->gambar }}" placeholder="" >
+                    <input type="file" class="form-control-file" name="image" value="{{ $car->image }}" placeholder="" >
                 </div>
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-upload    "></i> Update

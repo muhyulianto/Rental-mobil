@@ -10,10 +10,10 @@
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>Nama mobil</th>
-                                <th>Tipe peminjaman</th>
+                                <th>Car Name</th>
+                                <th>Services Type</th>
                                 <th>Status</th>
-                                <th class="text-right">Aksi</th>
+                                <th class="text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,14 +26,14 @@
                                     {{ $rent->nama_lengkap_mobil }}
                                 </td>
                                 <td>
-                                    {{ $rent->format_tipe_peminjaman }}
+                                    {{ $rent->format_services_type }}
                                 </td>
                                 <td>
                                     @if ($rent->status == 'pending')
                                     <div class="text-danger" role="alert">
                                         <i class="fas fa-hourglass-half    "></i> {{ $rent->status }}
                                     </div>
-                                    @elseif($rent->status == 'jalan')
+                                    @elseif($rent->status == 'onloan')
                                     <div class="text-success" role="alert">
                                         <i class="fa fa-list" aria-hidden="true"></i>
                                         dikonfirmasi

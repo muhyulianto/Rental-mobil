@@ -16,33 +16,33 @@
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
-                            <td class="text-muted w-50">Nama pelanggan</td>
-                            <th class="text-right">{{ $rent->customers->nama }}</th>
+                            <td class="text-muted w-50">Customer Name</td>
+                            <th class="text-right">{{ $rent->customers->name }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted w-50">Nama mobil</td>
+                            <td class="text-muted w-50">Car Name</td>
                             <th class="text-right">{{ $rent->nama_lengkap_mobil }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted">Mulai sewa</td>
-                            <th class="text-right">{{ $rent->format_mulai_sewa }}</th>
+                            <td class="text-muted">Start date</td>
+                            <th class="text-right">{{ $rent->format_start_date }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted">Lama sewa</td>
-                            <th class="text-right">{{ $rent->format_lama_sewa }}</th>
+                            <td class="text-muted">Duration</td>
+                            <th class="text-right">{{ $rent->format_duration }}</th>
                         </tr>
                         <tr>
                             <td class="text-muted">Habis sewa</td>
-                            <th class="text-right">{{ $rent->format_habis_sewa }}</th>
+                            <th class="text-right">{{ $rent->format_end_date }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted">Tipe peminjaman</td>
-                            <th class="text-right">{{ $rent->format_tipe_peminjaman }}</th>
+                            <td class="text-muted">Services Type</td>
+                            <th class="text-right">{{ $rent->format_services_type }}</th>
                         </tr>
-                        @if (!empty($rent->lokasi_penjemputan))
+                        @if (!empty($rent->pickup_location))
                         <tr>
                             <td class="text-muted">Lokasi penjemputan</td>
-                            <th class="text-right">{{ $rent->lokasi_penjemputan }}</th>
+                            <th class="text-right">{{ $rent->pickup_location }}</th>
                         </tr>
                         @endif
                         <tr>
@@ -77,7 +77,7 @@
                             <option disabled selected></option>
                             @foreach ($armadas as $armada)
                                 <option value="{{ $armada->id }}">
-                                    {{ $armada->nomor_plat }}
+                                    {{ $armada->license_plate }}
                                 </option> 
                             @endforeach
                         </select>
@@ -88,14 +88,14 @@
                         </p>
                         @endforelse
                     </div>
-                    @if ($rent->tipe_peminjaman != 1)
+                    @if ($rent->services_type != 1)
                     <div class="form-group">
-                        <label for="id_driver">Pilih driver</label>
-                        <select class="form-control" name="id_driver" id="id_driver">
+                        <label for="driver_id">Pilih driver</label>
+                        <select class="form-control" name="driver_id" id="driver_id">
                             <option disabled selected></option>
                             @foreach ($drivers as $driver)
                             <option value="{{ $driver->id }}">
-                                {{ $driver->driver_name }}
+                                {{ $driver->name }}
                             </option>
                             @endforeach
                         </select>

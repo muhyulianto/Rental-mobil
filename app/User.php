@@ -38,6 +38,6 @@ class User extends Authenticatable
     ];
 
     public function customers() {
-        return $this->hasOne('App\Customer', 'id_user', 'id');
+        return $this->hasOne('App\Customer', 'user_id', 'id');
     }
 }

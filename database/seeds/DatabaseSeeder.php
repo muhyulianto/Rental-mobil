@@ -6,7 +6,7 @@ use App\Car;
 use App\Armada;
 use App\Rent;
 use App\Driver;
-use App\Payment;
+use App\Invoice;
 use App\Customer;
 
 class DatabaseSeeder extends Seeder
@@ -21,16 +21,16 @@ class DatabaseSeeder extends Seeder
 
         $user = [
             [
-               'name'=>'Admin',
-               'email'=>'admin@test.com',
-               'is_admin'=>'1',
-               'password'=> bcrypt('123456'),
+                'name' => 'Admin',
+                'email' => 'admin@test.com',
+                'is_admin' => '1',
+                'password' => bcrypt('123456'),
             ],
             [
-               'name'=>'User',
-               'email'=>'user@test.com',
-               'is_admin'=>'0',
-               'password'=> bcrypt('123456'),
+                'name' => 'User',
+                'email' => 'user@test.com',
+                'is_admin' => '0',
+                'password' => bcrypt('123456'),
             ],
         ];
 
@@ -40,28 +40,28 @@ class DatabaseSeeder extends Seeder
 
         $car = [
             [
-                'jenis_mobil'   => 'MPV',
-                'nama_mobil'    => 'Avanza',
-                'merk_mobil'    => 'Toyota',
-                'harga'         => '200000',
-                'bahan_bakar'   => 'Pertalite',
-                'gambar'        => 'avanza.jpg'
+                'type'   => 'MPV',
+                'name'    => 'Avanza',
+                'brand'    => 'Toyota',
+                'price'         => '200000',
+                'fuel'   => 'Pertalite',
+                'image'        => 'avanza.jpg'
             ],
             [
-                'jenis_mobil'   => 'Sedan',
-                'nama_mobil'    => 'Camry',
-                'merk_mobil'    => 'Toyota',
-                'harga'         => '1000000',
-                'bahan_bakar'   => 'Pertamax',
-                'gambar'        => 'camry.png'
+                'type'   => 'Sedan',
+                'name'    => 'Camry',
+                'brand'    => 'Toyota',
+                'price'         => '1000000',
+                'fuel'   => 'Pertamax',
+                'image'        => 'camry.png'
             ],
             [
-                'jenis_mobil'   => 'SUV',
-                'nama_mobil'    => 'Terrios',
-                'merk_mobil'    => 'Daihatsu',
-                'harga'         => '500000',
-                'bahan_bakar'   => 'Premium',
-                'gambar'        => 'terios.png'
+                'type'   => 'SUV',
+                'name'    => 'Terrios',
+                'brand'    => 'Daihatsu',
+                'price'         => '500000',
+                'fuel'   => 'Premium',
+                'image'        => 'terios.png'
             ]
         ];
 
@@ -71,19 +71,19 @@ class DatabaseSeeder extends Seeder
 
         $armada = [
             [
-                'id_mobil'      => 1,
-                'nomor_plat'    => 'AD12345CD',
-                'status'        => 'tersedia'
+                'car_id'      => 1,
+                'license_plate'    => 'AD12345CD',
+                'status'        => 'available'
             ],
             [
-                'id_mobil'      => 2,
-                'nomor_plat'    => 'AD23454DE',
-                'status'        => 'tersedia'
+                'car_id'      => 2,
+                'license_plate'    => 'AD23454DE',
+                'status'        => 'available'
             ],
             [
-                'id_mobil'      => 3,
-                'nomor_plat'    => 'AD23474DE',
-                'status'        => 'tersedia'
+                'car_id'      => 3,
+                'license_plate'    => 'AD23474DE',
+                'status'        => 'available'
             ]
         ];
 
@@ -93,22 +93,22 @@ class DatabaseSeeder extends Seeder
 
         $driver = [
             [
-                "driver_name"   => "Sukijo",
-                "driver_age"    => 32,
-                "driver_address"=> "Tawangmangu",
-                "driver_phone"  => "085221223223"
+                "name"   => "Sukijo",
+                "age"    => 32,
+                "address" => "Tawangmangu",
+                "phone_number"  => "085221223223"
             ],
             [
-                "driver_name"   => "Sukijan",
-                "driver_age"    => 42,
-                "driver_address"=> "Karanganyar",
-                "driver_phone"  => "085221223224"
+                "name"   => "Sukijan",
+                "age"    => 42,
+                "address" => "Karanganyar",
+                "phone_number"  => "085221223224"
             ],
             [
-                "driver_name"   => "Suparman",
-                "driver_age"    => 35,
-                "driver_address"=> "Matesih",
-                "driver_phone"  => "085221223225"
+                "name"   => "Suparman",
+                "age"    => 35,
+                "address" => "Matesih",
+                "phone_number"  => "085221223225"
             ]
         ];
 

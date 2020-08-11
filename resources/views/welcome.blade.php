@@ -11,7 +11,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores recusandae dolorem sit voluptas accusantium, facilis sequi illum totam. Illum eos pariatur architecto eveniet et! Doloribus blanditiis suscipit eligendi tenetur ullam!
             </div>
             <button type="button" class="btn btn-primary d-block mt-3">
-                Mulai sewa
+                Start date
             </button>
         </div>
         <div class="col-lg-6">

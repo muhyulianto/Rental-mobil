@@ -46965,15 +46965,15 @@ if (token) {
 /***/ (function(module, exports) {
 
 // menyembunyikan form tempat penjemputan jika hanya menyewa mobil
-if ($("#tipe_peminjaman").val() == "1") {
-  $('#lokasi_penjemputan').hide();
+if ($("#services_type").val() == "1") {
+  $("#pickup_location").hide();
 }
 
-$("#tipe_peminjaman").change(function () {
+$("#services_type").change(function () {
   if ($(this).val() == "1") {
-    $('#lokasi_penjemputan').hide();
+    $("#pickup_location").hide();
   } else {
-    $('#lokasi_penjemputan').show();
+    $("#pickup_location").show();
   }
 });
 
@@ -48925,8 +48925,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Htdocs\sistem-informasi\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Htdocs\sistem-informasi\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Htdocs\sistem-informasi-rental-mobil\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Htdocs\sistem-informasi-rental-mobil\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

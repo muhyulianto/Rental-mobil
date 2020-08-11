@@ -12,34 +12,38 @@ class Car extends Model
      * @var array
      */
     protected $fillable = [
-        'jenis_mobil', 'nama_mobil', 'merk_mobil', 'bahan_bakar', 'harga'
+        'type', 'name', 'brand', 'fuel', 'price'
     ];
-    
+
     /**
      * 
      * RELATIONSHIP
      *
      */
-    public function armadas() {
-        return $this->hasMany('App\Armada', 'id_mobil', 'id');
+    public function armadas()
+    {
+        return $this->hasMany('App\Armada', 'car_id', 'id');
     }
-    
+
     /**
      * 
      * MUTATOR
      * 
      */
-    public function getFormatHargaAttribute() {
-        return "Rp.".$this->harga.",-";
+    public function getFormatPriceAttribute()
+    {
+        return "Rp." . $this->price . ",-";
     }
 
-    public function getFormatJumlahArmadaAttribute() {
+    public function getFormatJumlahArmadaAttribute()
+    {
         $jumlah_armada = $this->armadas_count;
-        $cek_jumlah_armada = ($jumlah_armada == 0 ? ' Kosong' : $jumlah_armada.' Unit');
+        $cek_jumlah_armada = ($jumlah_armada == 0 ? ' Kosong' : $jumlah_armada . ' Unit');
         return $cek_jumlah_armada;
     }
 
-    public function getNamaLengkapMobilAttribute() {
-        return "{$this->merk_mobil} {$this->nama_mobil}";
+    public function getNamaLengkapMobilAttribute()
+    {
+        return "{$this->brand} {$this->name}";
     }
 }

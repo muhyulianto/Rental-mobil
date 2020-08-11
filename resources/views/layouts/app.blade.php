@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <livewire:styles />
 </head>
 <body>
     <div id="app">
@@ -28,15 +30,9 @@
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 @else
-                    @if (Auth::user()->is_admin)
-                    <a class="navbar-brand" href="{{ route('adminDashboard') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                    @else
                     <a class="navbar-brand" href="{{ route('welcome') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
-                    @endif
                 @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -67,9 +63,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right border-0 shadow-sm" aria-labelledby="navbarDropdown">
+                                    @if (!Auth::user()->is_admin)
                                     <a href="{{ route('user_home') }}" class="dropdown-item">Katalog</a>
                                     <a href="{{ route('rentUser.index') }}" class="dropdown-item">Peminjaman</a>
                                     <a href="{{ route('CustomerUser.index') }}" class="dropdown-item">Data diri</a>
+                                    @endif
+                                    <a href="{{ route('adminDashboard') }}" class="dropdown-item">Dashboard</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
@@ -93,5 +92,7 @@
     </div>
     <!-- Sweetalert -->
     @include('sweetalert::alert')
+
+    <livewire:scripts />
 </body>
 </html>

@@ -20,15 +20,15 @@ class DriverController extends Controller
         $orderType = $request->orderType ? $request->orderType : 'DESC';
 
         if ($request->has('search_query')) {
-            $drivers = Driver::where('driver_name', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('driver_age', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('driver_address', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('driver_status', 'LIKE', '%'.$request->search_query.'%')
-            ->orderBy($orderBy, $orderType)
-            ->paginate(10);
+            $drivers = Driver::where('name', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('age', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('address', 'LIKE', '%' . $request->search_query . '%')
+                ->orWhere('status', 'LIKE', '%' . $request->search_query . '%')
+                ->orderBy($orderBy, $orderType)
+                ->paginate(10);
         } else {
             $drivers = Driver::orderBy($orderBy, $orderType)
-            ->paginate(10);
+                ->paginate(10);
         }
 
         $drivers->appends([
@@ -56,7 +56,6 @@ class DriverController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -68,12 +67,12 @@ class DriverController extends Controller
     public function store(Request $request)
     {
         $driver = new Driver;
-        $driver->driver_name = $request->driver_name;
-        $driver->driver_age = $request->driver_age;
-        $driver->driver_address = $request->driver_address;
-        $driver->driver_phone = $request->driver_phone;
+        $driver->name = $request->name;
+        $driver->age = $request->age;
+        $driver->address = $request->address;
+        $driver->phone_number = $request->phone_number;
         $driver->save();
-        
+
         return redirect()->route("driver.index");
     }
 
@@ -110,10 +109,10 @@ class DriverController extends Controller
     public function update(Request $request, driver $driver)
     {
         $driver = Driver::find($driver->id);
-        $driver->driver_name = $request->driver_name;
-        $driver->driver_age = $request->driver_age;
-        $driver->driver_address = $request->driver_address;
-        $driver->driver_phone = $request->driver_phone;
+        $driver->name = $request->name;
+        $driver->age = $request->age;
+        $driver->address = $request->address;
+        $driver->phone_number = $request->phone_number;
         $driver->save();
 
         Alert::success('Berhasil', 'Data telah diupdate');

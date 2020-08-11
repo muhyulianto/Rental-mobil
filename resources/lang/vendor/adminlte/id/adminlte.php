@@ -5,7 +5,7 @@ return [
     'full_name'                   => 'Nama lengkap',
     'email'                       => 'Email',
     'password'                    => 'Kata sandi',
-    'retype_password'             => 'Ketik kembali kata sandi',
+    'retype_password'             => 'Ketik completed kata sandi',
     'remember_me'                 => 'Ingat saya',
     'register'                    => 'Daftar',
     'register_a_new_membership'   => 'Daftar anggota baru',

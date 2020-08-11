@@ -27,16 +27,16 @@
                             </th>
                             <th>
                                 <a href="{{ Request::fullUrlWithQuery([
-                                    'orderBy'   => 'nama_mobil',
+                                    'orderBy'   => 'name',
                                     'orderType' => $orderType
                                 ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
-                                    NAMA MOBIL
+                                    Car Name
                                     <i class="fas fa-sort"></i>
                                 </a>
                             </th>
                             <th>
                                 <a href="{{ Request::fullUrlWithQuery([
-                                    'orderBy'   => 'nomor_plat',
+                                    'orderBy'   => 'license_plate',
                                     'orderType' => $orderType
                                 ]) }}" class="btn btn-link text-dark font-weight-bold p-0">
                                     NOMOR PLAT
@@ -52,7 +52,7 @@
                                     <i class="fas fa-sort"></i>
                                 </a>
                             </th>
-                            <th class="text-right">Aksi</th>
+                            <th class="text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,11 +63,11 @@
                             </td>
                             <td scope="row">
                                 <a href="{{ route("car.show", $armada->cars->id) }}">
-                                    {{ $armada->format_nama_mobil }}
+                                    {{ $armada->format_name }}
                                 </a>
                             </td>
                             <td>
-                                {{ $armada->nomor_plat }}
+                                {{ $armada->license_plate }}
                             </td>
                             <td>
                                 {{ $armada->status }}

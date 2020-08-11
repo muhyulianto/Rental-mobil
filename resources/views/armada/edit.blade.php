@@ -15,14 +15,14 @@
                         @method('PATCH')
                         <fieldset disabled="disabled">
                             <div class="form-group">
-                                <label for="id_mobil">Mobil</label>
-                                <input type="text" id="nomor_plat" class="form-control disabled" value="{{ $armada->cars->nama_lengkap_mobil }}" aria-describedby="nomor_plat_help">
+                                <label for="car_id">Mobil</label>
+                                <input type="text" id="license_plate" class="form-control disabled" value="{{ $armada->cars->nama_lengkap_mobil }}" aria-describedby="license_plate_help">
                             </div>
                         </fieldset>
                         <div class="form-group">
-                            <label for="nomor_plat">Nomor plat</label>
-                            <input type="text" name="nomor_plat" id="nomor_plat" class="form-control" value="{{ $armada->nomor_plat }}" aria-describedby="nomor_plat_help">
-                            <small id="nomor_plat_help" class="text-muted"></small>
+                            <label for="license_plate">Nomor plat</label>
+                            <input type="text" name="license_plate" id="license_plate" class="form-control" value="{{ $armada->license_plate }}" aria-describedby="license_plate_help">
+                            <small id="license_plate_help" class="text-muted"></small>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-upload    "></i>
