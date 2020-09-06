@@ -2,6 +2,7 @@
 
 namespace App;
 
+use File;
 use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
@@ -30,19 +31,25 @@ class Car extends Model
      * MUTATOR
      * 
      */
+    public function setImageNameAttribute()
+    {
+        $imageName = time() . '.' . File::getClientOriginalExtension();
+        $this->attributes['image'] = $imageName;
+    }
+
     public function getFormatPriceAttribute()
     {
         return "Rp." . $this->price . ",-";
     }
 
-    public function getFormatJumlahArmadaAttribute()
+    public function getFormatArmadaCountAttribute()
     {
         $jumlah_armada = $this->armadas_count;
         $cek_jumlah_armada = ($jumlah_armada == 0 ? ' Kosong' : $jumlah_armada . ' Unit');
         return $cek_jumlah_armada;
     }
 
-    public function getNamaLengkapMobilAttribute()
+    public function getCarFullNameAttribute()
     {
         return "{$this->brand} {$this->name}";
     }

@@ -19,74 +19,82 @@
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-vertical-center">
+        <table class="table">
             <thead>
                 <tr>
                     <th>
                         No
                     </th>
                     <th>
-                        Invoice Number
-                    </th>
-                    <th>
                         <a href="#" role="button" class="text-dark" wire:click.prevent="ordering('name')">
-                            Customer Name
+                            Name
                             @include('include.ordering-icon', ['order' => 'name'])
                         </a>
                     </th>
                     <th>
-                        <a href="#" role="button" class="text-dark" wire:click.prevent="ordering('total_price')">
-                            Total
-                            @include('include.ordering-icon', ['order' => 'total_price'])
+                        <a href="#" role="button" class="text-dark" wire:click.prevent="ordering('age')">
+                            Age
+                            @include('include.ordering-icon', ['order' => 'age'])
                         </a>
                     </th>
                     <th>
-                        Status
+                        Address
+                    </th>
+                    <th>
+                        <a href="#" role="button" class="text-dark" wire:click.prevent="ordering('status')">
+                            Status
+                            @include('include.ordering-icon', ['order' => 'status'])
+                        </a>
+                    </th>
+                    <th>
+                        Phone Number
                     </th>
                     <th class="text-right">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($invoices as $key => $invoice)
+                @forelse ($drivers as $key => $driver)
                 <tr>
                     <td>
-                        {{ $invoices->firstItem() + $key }}
+                        {{ $drivers->firstItem() + $key }}
                     </td>
                     <td>
-                        {{ $invoice->invoice_number }}
+                        {{ $driver->name }}
                     </td>
                     <td>
-                        <a href="{{ route("customer.show", $invoice->customers->id) }}">
-                            {{ $invoice->customers->name }}
-                        </a>
+                        {{ $driver->format_age }}
+                    </td>
+                    <td class="w-25">
+                        {{ $driver->address }}
                     </td>
                     <td>
-                        {{ $invoice->format_total_price }}
+                        {{ $driver->status }}
+                    </td>
                     <td>
-                    @if ($invoice->status == 'pending')
-                    <div class="text-danger">
-                        <i class="fa fa-hourglass-half" aria-hidden="true"></i> {{ $invoice->status }}
-                    </div>
-                    @else
-                    <div class="text-success">
-                        <i class="fas fa-check    "></i> {{ $invoice->status}}
-                    </div>
-                    @endif
+                        {{ $driver->phone_number }}
                     </td>
                     <td class="text-right">
-                        <a href="{{ route("invoice.show", $invoice->id) }}" class="btn btn-success btn-sm" >
-                            <i class="fas fa-eye    "></i>
+                        <a href="{{ route("driver.edit", $driver->id) }}" type="button" class="btn btn-primary btn-sm">
+                            <i class="fas fa-pencil-alt    "></i>
                         </a>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete">
+                            <i class="fas fa-trash    "></i>
+                        </button>
+                        @include('driver.modal-delete')
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="7" class="text-center">Data not found</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
     <div class="d-flex justify-content-between">
         <div class="align-self-center">
-            Showing {{ $invoices->currentPage() }} to {{ $invoices->perPage() }} of {{ $invoices->total() }} entries
+            Showing {{ $drivers->currentPage() }} to {{ $drivers->perPage() }} of {{ $drivers->total() }} entries
         </div>
-        {{ $invoices->links() }}
+        {{ $drivers->links() }}
     </div>
 </div>

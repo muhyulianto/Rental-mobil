@@ -9,19 +9,18 @@
                     <a href="{{ url()->previous() }}" class="mr-3">
                         <span class="fa fa-arrow-left text-primary"></span>
                     </a>
-                    Customer data
+                    Customer details
                 </div>
             </div>
             <div class="card-body">
-                {{-- <img class="img-fluid d-block mx-auto mb-4" style="height: 250px;" src="{{ asset("images/$customer->profile") }}" alt="" srcset=""> --}}
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-borderless">
                         <tr>
-                            <td class="text-muted border-top-0 w-50">Nama lengkap</td>
+                            <td class="text-muted border-top-0 w-50">Name</td>
                             <th class="text-right border-top-0">{{ $customer->name }}</th>
                         </tr>
                         <tr>
-                            <td class="text-muted">Nomor ktp</td>
+                            <td class="text-muted">ID Card Number</td>
                             <th class="text-right">{{ $customer->id_card_number }}</>
                         </tr>
                         <tr>

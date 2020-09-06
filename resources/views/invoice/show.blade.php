@@ -9,15 +9,15 @@
                     <a href="{{ route('invoice.index') }}" class="mr-3">
                         <span class="fa fa-arrow-left text-primary"></span>
                     </a>
-                    Detail tagihan
+                    Invoice details
                 </h4>
                 </h4>
                 @if ($invoice->rents->status == 'pending')
                 <form class="d-inline" action="{{ route('invoice.update', $invoice->id) }}" method="post">
                     @csrf
                     @method('PUT')
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-check    "></i> Konfirmasi
+                    <button type="submit" class="btn btn-primary shadow">
+                        <i class="fas fa-check    "></i> Confirm
                     </button>
                 </form>
                 @endif
@@ -26,13 +26,13 @@
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>
-                            <th>Jasa</th>
-                            <th>Biaya</th>
-                            <th>Waktu</th>
+                            <th>Service</th>
+                            <th>Price</th>
+                            <th>Duration</th>
                             <th class="text-right">Total</th>
                         </tr>
                         <tr>
-                            <td class="w-50">Mobil</td>
+                            <td class="w-50">Car</td>
                             <td>
                                 {{ $invoice->rents->cars->format_price }}
                             </td>
@@ -45,7 +45,7 @@
                         </tr>
                         @if ($invoice->rents->services_type != 1)
                         <tr>
-                            <td class="w-50">Sopir</td>
+                            <td class="w-50">Driver</td>
                             <td>
                                 Rp.100000,-
                             </td>
@@ -57,7 +57,7 @@
                         @endif
                         @if ($invoice->rents->services_type == 3)
                         <tr>
-                            <td class="w-50">Bahan bakar</td>
+                            <td class="w-50">Fuel</td>
                             <td>
                                 Rp.100000,-
                             </td>
@@ -71,7 +71,7 @@
                         @endif
                         <tr>
                             <td colspan="3">
-                                Total akhir
+                                Final price
                             </td>
                             <th class="text-right border-top">
                                 {{ $invoice->rents->format_total_price }}
@@ -86,11 +86,11 @@
         <div class="card">
             <div class="card-header border-0">
                 <div class="card-title">
-                    Bukti pembayaran
+                    Payment proof
                 </div>
             </div>
             <div class="card-body text-center">
-                <img src="{{ asset('storage/bukti/'.$invoice->payment_proof) }}" class="img-fluid text-danger" alt="Pelanggan belum mengupload bukti pembayaran">
+                <img src="{{ asset('storage/bukti/'.$invoice->payment_proof) }}" class="img-fluid text-danger" alt="Customer hasn't uploaded payment proof yet">
             </div>
         </div>
     </div>

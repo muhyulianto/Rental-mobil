@@ -16,45 +16,8 @@ class ArmadaController extends Controller
      */
     public function index(Request $request)
     {
-
-        // set default order value
-        $orderBy = $request->orderBy ? $request->orderBy : 'created_at';
-        $orderType = $request->orderType ? $request->orderType : 'DESC';
-
         $cars = Car::all();
-
-        if ($request->has('search_query')) {
-            $armadas = Armada::join('cars', 'armadas.car_id', '=', 'cars.id')
-            ->select('armadas.*', \DB::raw('CONCAT_WS(" ", brand, name) as name'))
-            ->where(\DB::raw('CONCAT_WS(" ", brand, name)'), 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('license_plate', 'LIKE', '%'.$request->search_query.'%')
-            ->orWhere('status', 'LIKE', '%'.$request->search_query.'%')
-            ->orderBy($orderBy, $orderType)
-            ->paginate(10);
-        } else {
-            $armadas = Armada::join('cars', 'armadas.car_id', '=', 'cars.id')
-            ->select('armadas.*', \DB::raw('CONCAT(brand," ",name) as name'))
-            ->orderBy($orderBy, $orderType)
-            ->paginate(10);
-        }
-
-        $armadas->appends([
-            'search_query' => $request->search_query
-        ]);
-
-        // append order query
-        if ($orderBy != 'created_at') {
-            $armadas->appends([
-                'orderBy'   => $orderBy,
-                'orderType' => $orderType
-            ]);
-        }
-
-        return view('armada.index')->with([
-            'armadas'   => $armadas,
-            'cars'      => $cars,
-            'orderType' => $orderType == 'DESC' ? 'ASC' : 'DESC'
-        ]);
+        return view('armada.index')->with('cars', $cars);
     }
 
     /**
@@ -77,7 +40,7 @@ class ArmadaController extends Controller
     {
         Armada::Create($request->all());
 
-        Alert::success('Berhasil', 'Data telah ditambahkan!');
+        Alert::success('Success!', 'Data has been added');
         return redirect()->back();
     }
 
@@ -120,7 +83,7 @@ class ArmadaController extends Controller
         $armada->license_plate = $request->license_plate;
         $armada->save();
 
-        Alert::success('Berhasil', 'Data telah diperbarui!');
+        Alert::success('Success!', 'Data has been updated');
         return redirect()->route('armada.index');
     }
 
@@ -134,7 +97,7 @@ class ArmadaController extends Controller
     {
         Armada::find($armada->id)->delete();
 
-        Alert::success('Berhasil', 'Data telah dihapus!');
+        Alert::success('Success!', 'Data has been deleted');
         return redirect()->back();
     }
 }

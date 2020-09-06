@@ -2,7 +2,10 @@
     cursor: pointer;
 }
 
-.table-responsive > .table > thead > tr > th {
+.table-responsive,
+.table-responsive-lg,
+.table-responsive-md,
+.table-responsive-sm > .table > thead > tr > th {
     border-top-width: 0;
 }
 

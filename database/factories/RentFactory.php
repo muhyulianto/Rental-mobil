@@ -5,8 +5,6 @@
 use App\Rent;
 use App\Car;
 use App\Customer;
-use App\Driver;
-use App\Armada;
 use Carbon\Carbon;
 
 use Faker\Generator as Faker;

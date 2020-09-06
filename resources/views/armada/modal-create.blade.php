@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <form action="{{ route("armada.store") }}" method="post">
                     <div class="form-group">
-                        <label for="car_id">Mobil</label>
+                        <label for="car_id">Car</label>
                         <select class="form-control selectpicker" data-live-search="true" data-size="5" title=". . ." name="car_id" id="car_id">
                             <option selected disabled></option>
                             @foreach ($cars as $car)
@@ -22,9 +22,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="license_plate">Nomor plat</label>
-                        <input type="text" name="license_plate" id="license_plate" class="form-control" placeholder="" aria-describedby="license_plate_help" autocomplete="off" required>
-                        <small id="license_plate_help" class="text-muted"></small>
+                        <label for="license_plate">License Plate</label>
+                        <input type="text" name="license_plate" id="license_plate" class="form-control" autocomplete="off" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Tambahkan</button>
                 </form>

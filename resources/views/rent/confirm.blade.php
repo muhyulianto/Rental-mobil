@@ -21,7 +21,7 @@
                         </tr>
                         <tr>
                             <td class="text-muted w-50">Car Name</td>
-                            <th class="text-right">{{ $rent->nama_lengkap_mobil }}</th>
+                            <th class="text-right">{{ $rent->car_full_name }}</th>
                         </tr>
                         <tr>
                             <td class="text-muted">Start date</td>
@@ -64,12 +64,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route("pending_update") }}" method="post">
+                <form action="{{ route("rents.update_pending", $rent->id) }}" method="post">
                     <input class="d-none" type="text" name="id" value="{{ $rent->id }}">
                     <div class="form-group">
                         <label for="mobil">Mobil</label>
-                        <input type="text" id="mobil" class="form-control" value="{{ $rent->nama_lengkap_mobil }}" aria-describedby="mobil_help" disabled >
-                        <small id="mobil_help" class="text-muted"></small>
+                        <input type="text" id="mobil" class="form-control" value="{{ $rent->car_full_name }}" aria-describedby="mobil_help" disabled >
                     </div>
                     <div class="form-group">
                         <label for="id_armada">Pilih armada</label>

@@ -17,7 +17,7 @@ class CreateArmadasTable extends Migration
             $table->bigIncrements('id');
             $table->integer('car_id');
             $table->string('license_plate');
-            $table->enum('status', ['available', 'onloan'])->default('available');
+            $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->timestamps();
         });
     }

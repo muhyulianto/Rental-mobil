@@ -4,50 +4,30 @@ namespace App\Http\Controllers;
 
 use Alert;
 use App\Car;
+use App\Services\CarService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
+    /**
+     * __construct
+     *
+     * @param  mixed $carService
+     * @return void
+     */
+    public function __construct(CarService $carService)
+    {
+        $this->carService = $carService;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // set default order value
-        $orderBy = $request->orderBy ? $request->orderBy : 'created_at';
-        $orderType = $request->orderType ? $request->orderType : 'DESC';
-
-        if ($request->has('search_query')) {
-            $cars = Car::withCount('armadas')
-                ->where('type', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('name', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere(\DB::raw('CONCAT(brand," ",name)'), 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('brand', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('price', 'LIKE', '%' . $request->search_query . '%')
-                ->orderBy($orderBy, $orderType)
-                ->paginate(10);
-        } else {
-            $cars = Car::withCount('armadas')
-                ->orderBy($orderBy, $orderType)
-                ->paginate(10);
-        }
-
-        // append order query
-        if ($orderBy != 'created_at') {
-            $cars->appends([
-                'orderBy'   => $orderBy,
-                'orderType' => $orderType
-            ]);
-        }
-
-        return view('car.index')->with([
-            'cars' => $cars,
-            'orderType' => $orderType == 'DESC' ? 'ASC' : 'DESC'
-        ]);
+        return view('car.index');
     }
 
     /**
@@ -68,21 +48,8 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile("image")) {
-            $image_name = time() . '.' . $file->getClientOriginalExtension();
-            Storage::putFileAs("public/images", $request->file('image'), $image_name);
-        } else {
-            $image_name = 'default.jpg';
-        }
-
-        $car = new Car;
-        $car->type = $request->type;
-        $car->name = $request->name;
-        $car->brand = $request->brand;
-        $car->fuel = $request->fuel;
-        $car->price = $request->price;
-        $car->image = $image_name;
-        $car->save();
+        $car = Car::create($request->all());
+        $this->carService->handleUploadImage($request->file('image'), $car);
 
         Alert::success('Berhasil', 'Data telah ditambahkan!');
         return redirect()->route("car.index");
@@ -122,22 +89,8 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         $car = Car::find($car->id);
-        $file = $request->file('image');
-
-        if ($request->hasFile("image")) {
-            $image_name = time() . '.' . $file->getClientOriginalExtension();
-            Storage::putFileAs("public/images", $file, $image_name);
-        } else {
-            $image_name = $car->image;
-        }
-
-        $car->type = $request->type;
-        $car->name = $request->name;
-        $car->brand = $request->brand;
-        $car->fuel = $request->fuel;
-        $car->price = $request->price;
-        $car->image = $image_name;
-        $car->save();
+        $car->update($request->all());
+        $this->carService->handleUploadImage($request->file('image'), $car);
 
         Alert::success('Berhasil', 'Data telah diubah!');
         return redirect()->route("car.index");

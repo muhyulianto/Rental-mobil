@@ -17,12 +17,12 @@ class CreateRentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('car_id');
-            $table->unsignedBigInteger('id_armada')->nullable();
+            $table->unsignedBigInteger('armada_id')->nullable();
             $table->unsignedBigInteger('driver_id')->nullable();
             $table->integer('services_type');
-            $table->date('start_date');
+            $table->timestamp('start_date');
             $table->integer('duration');
-            $table->date('end_date');
+            $table->timestamp('end_date')->nullable();
             $table->string('pickup_location')->nullable();
             $table->enum('status', ['pending', 'onloan', 'completed'])->default('pending');
             $table->timestamps();
@@ -32,7 +32,7 @@ class CreateRentsTable extends Migration
                 ->on('customers')->onDelete('cascade');
             $table->foreign('car_id')->references('id')
                 ->on('cars')->onDelete('cascade');
-            $table->foreign('id_armada')->references('id')
+            $table->foreign('armada_id')->references('id')
                 ->on('armadas')->onDelete('cascade');
             $table->foreign('driver_id')->references('id')
                 ->on('drivers')->onDelete('cascade');

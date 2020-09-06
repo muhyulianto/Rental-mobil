@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Alert;
 use App\Invoice;
-use App\Rent;
-use App\Armada;
-use App\Driver;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -16,42 +13,9 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // set default order value
-        $orderBy = $request->orderBy ? $request->orderBy : 'created_at';
-        $orderType = $request->orderType ? $request->orderType : 'DESC';
-
-        if ($request->has('search_query')) {
-            $invoices = Invoice::with('customers')
-                ->join('customers', 'invoices.customer_id', '=', 'customers.id')
-                ->select('invoices.*', 'customers.name')
-                ->where('name', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('invoice_number', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('total_price', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('status', 'LIKE', '%' . $request->search_query . '%')
-                ->orderBy($orderBy, $orderType)
-                ->paginate(10);
-        } else {
-            $invoices = Invoice::with('customers')
-                ->join('customers', 'invoices.customer_id', '=', 'customers.id')
-                ->select('invoices.*', 'customers.name')
-                ->orderBy($orderBy, $orderType)
-                ->paginate(10);
-        }
-
-        // append order query
-        if ($orderBy != 'created_at') {
-            $invoices->appends([
-                'orderBy'   => $orderBy,
-                'orderType' => $orderType
-            ]);
-        }
-
-        return view('Invoice.index')->with([
-            'invoices' => $invoices,
-            'orderType' => $orderType == 'DESC' ? 'ASC' : 'DESC'
-        ]);
+        return view('invoice.index');
     }
 
     /**
@@ -113,7 +77,7 @@ class InvoiceController extends Controller
         $invoice->status = 'paid';
         $invoice->save();
 
-        Alert::success('Berhasil', 'Pembayaran telah dikonfirmasi');
+        Alert::success('Success!', 'Payment has been confirmed');
         return redirect()->route('pending_show', $invoice->rents->id);
     }
 

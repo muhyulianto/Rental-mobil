@@ -33,29 +33,34 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'is_admin'], function () {
-
     Route::get('dashboard', 'DashboardController@index')->name('adminDashboard');
 
-    Route::get('rent/create', 'RentController@create_rent_admin')->name('create_rent_admin');
-    Route::post('rent/create', 'RentController@store_rent_admin')->name('store_rent_admin');
+    Route::resource('rents', 'RentController');
+    Route::get('admin/rents/{id}/pending', 'RentController@showPending')->name('rents.show_pending');
+    Route::post('admin/rents/{id}/pending', 'RentController@updatePending')->name('rents.update_pending');
+    Route::get('admin/rents/{id}/onloan', 'RentController@showOnloan')->name('rents.show_onloan');
+    Route::post('admin/rents/{id}/onloan', 'RentController@updateOnloan')->name('rents.update_onloan');
 
-    // Pending rent
-    Route::get('rent/pending', 'RentController@index')->name('pending_index');
-    Route::get('rent/pending/{id}', 'RentController@pending_show')->name('pending_show');
-    Route::post('rent/pending', 'RentController@pending_update')->name('pending_update');
-    Route::delete('rent/pending/{id}', 'RentController@pending_destroy')->name('pending_destroy');
+    // Route::get('rent/create', 'RentController@create_rent_admin')->name('create_rent_admin');
+    // Route::post('rent/create', 'RentController@store_rent_admin')->name('store_rent_admin');
 
-    // on rent
-    Route::get('rent/onloan', 'RentController@index')->name('rent_index');
-    Route::get('rent/onloan/{id}', 'RentController@rent_show')->name('rent_show');
-    Route::post('rent/onloan/{id}', 'RentController@rent_update')->name('rent_update');
+    // // Pending rent
+    // Route::get('rent/pending', 'RentController@index')->name('pending_index');
+    // Route::get('rent/pending/{id}', 'RentController@pending_show')->name('pending_show');
+    // Route::post('rent/pending', 'RentController@pending_update')->name('pending_update');
+    // Route::delete('rent/pending/{id}', 'RentController@pending_destroy')->name('pending_destroy');
 
-    // Returned rent
-    Route::get('rent/completed', 'RentController@index')->name('return_index');
-    Route::get('rent/completed/{id}', 'RentController@rent_show')->name('return_info');
+    // // on rent
+    // Route::get('rent/onloan', 'RentController@index')->name('rent_index');
+    // Route::get('rent/onloan/{id}', 'RentController@rent_show')->name('rent_show');
+    // Route::post('rent/onloan/{id}', 'RentController@rent_update')->name('rent_update');
 
-    // Checkout rent
-    Route::get("rent/checkout/{id}", "RentController@checkout")->name("checkout_rent");
+    // // Returned rent
+    // Route::get('rent/completed', 'RentController@index')->name('return_index');
+    // Route::get('rent/completed/{id}', 'RentController@rent_show')->name('return_info');
+
+    // // Checkout rent
+    // Route::get("rent/checkout/{id}", "RentController@checkout")->name("checkout_rent");
 
     // Car route
     Route::resource('car', 'CarController');

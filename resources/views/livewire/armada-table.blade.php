@@ -26,67 +26,58 @@
                         No
                     </th>
                     <th>
-                        Invoice Number
-                    </th>
-                    <th>
                         <a href="#" role="button" class="text-dark" wire:click.prevent="ordering('name')">
-                            Customer Name
+                            Car Name
                             @include('include.ordering-icon', ['order' => 'name'])
                         </a>
                     </th>
                     <th>
-                        <a href="#" role="button" class="text-dark" wire:click.prevent="ordering('total_price')">
-                            Total
-                            @include('include.ordering-icon', ['order' => 'total_price'])
-                        </a>
+                        License Plate
                     </th>
                     <th>
-                        Status
+                        <a href="#" role="button" class="text-dark" wire:click.prevent="ordering('status')">
+                            Status
+                            @include('include.ordering-icon', ['order' => 'status'])
+                        </a>
                     </th>
                     <th class="text-right">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($invoices as $key => $invoice)
+                @foreach ($armadas as $key => $armada)
                 <tr>
                     <td>
-                        {{ $invoices->firstItem() + $key }}
+                        {{ $key + 1 }}
                     </td>
-                    <td>
-                        {{ $invoice->invoice_number }}
-                    </td>
-                    <td>
-                        <a href="{{ route("customer.show", $invoice->customers->id) }}">
-                            {{ $invoice->customers->name }}
+                    <td scope="row">
+                        <a href="{{ route("car.show", $armada->cars->id) }}">
+                            {{ $armada->format_name }}
                         </a>
                     </td>
                     <td>
-                        {{ $invoice->format_total_price }}
+                        {{ $armada->license_plate }}
+                    </td>
                     <td>
-                    @if ($invoice->status == 'pending')
-                    <div class="text-danger">
-                        <i class="fa fa-hourglass-half" aria-hidden="true"></i> {{ $invoice->status }}
-                    </div>
-                    @else
-                    <div class="text-success">
-                        <i class="fas fa-check    "></i> {{ $invoice->status}}
-                    </div>
-                    @endif
+                        {{ $armada->status }}
                     </td>
                     <td class="text-right">
-                        <a href="{{ route("invoice.show", $invoice->id) }}" class="btn btn-success btn-sm" >
-                            <i class="fas fa-eye    "></i>
+                        <a href="{{ route("armada.edit", $armada->id) }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-pencil-alt    "></i>
                         </a>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete">
+                            <i class="fas fa-trash    "></i>
+                        </button>
                     </td>
                 </tr>
+                @include('armada.modal-delete')
                 @endforeach
             </tbody>
         </table>
     </div>
     <div class="d-flex justify-content-between">
         <div class="align-self-center">
-            Showing {{ $invoices->currentPage() }} to {{ $invoices->perPage() }} of {{ $invoices->total() }} entries
+            Showing {{ $armadas->currentPage() }} to {{ $armadas->perPage() }} of {{ $armadas->total() }} entries
         </div>
-        {{ $invoices->links() }}
+        {{ $armadas->links() }}
     </div>
 </div>

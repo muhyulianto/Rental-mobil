@@ -216,26 +216,8 @@ return [
         [
             'text'        => 'Peminjaman',
             'icon'        => 'fa fa-server',
-            'submenu'     => [
-                [
-                    'text'      => 'Pending',
-                    'icon'      => 'fa fa-hourglass-half',
-                    'url'       => 'admin/rent/pending',
-                    'active'    => ['admin/rent/pending', 'admin/rent/pending?*', 'regex:@^admin/rent/pending/[0-9]+$@', 'admin/rent/create']
-                ],
-                [
-                    'text'      => 'Disewa',
-                    'icon'      => 'fa fa-car-side',
-                    'url'       => 'admin/rent/onloan',
-                    'active'    => ['admin/rent/onloan', 'admin/rent/onloan?*', 'regex:@^admin/rent/onloan/[0-9]+$@']
-                ],
-                [
-                    'text'      => 'Kembali',
-                    'icon'      => 'fa fa-check',
-                    'url'       => 'admin/rent/completed',
-                    'active'    => ['admin/rent/completed', 'admin/rent/completed?*', 'regex:@^admin/rent/completed/[0-9]+$@'],
-                ]
-            ]
+            'url'         => 'admin/rents',
+            'active'      => ['admin/rents*']
         ],
         [
             'text'        => 'Mobil',
@@ -245,16 +227,13 @@ return [
                     'text'      => 'Data mobil',
                     'url'       => 'admin/car',
                     'icon'      => 'fa fa-list',
-                    'active'    => [
-                        'admin/car',
-                        'admin/car/*/edit',
-                        'regex:@^admin/car/[0-9]+$@'
-                    ]
+                    'active'    => ['admin/car*']
                 ],
                 [
                     'text'      => 'Armada mobil',
                     'icon'      => 'fa fa-list',
-                    'url'       => 'admin/armada'
+                    'url'       => 'admin/armada',
+                    'active'    => ['admin/armada*']
                 ]
             ]
         ],
@@ -262,28 +241,19 @@ return [
             'text'        => 'Customer',
             'url'         => 'admin/customer',
             'icon'        => 'fa fa-user',
-            'active'      => [
-                'admin/customer',
-                'admin/customer?page=*',
-                'regex:@^admin/customer/[0-9]+$@'
-            ]
+            'active'      => ['admin/customer*']
         ],
         [
             'text'      => 'Driver',
             'icon'      => 'fa fa-wheelchair',
             'url'       => 'admin/driver',
-            'active'    => [
-                'admin/driver',
-            ]
+            'active'    => ['admin/driver*']
         ],
         [
             'text'      => 'Invoice',
             'url'       => 'admin/invoice',
             'icon'      => 'fa fa-credit-card',
-            'active'    => [
-                'admin/invoice',
-                'regex:@^admin/invoice/[0-9]+$@'
-            ]
+            'active'    => ['admin/invoice']
         ]
     ],
 
@@ -303,7 +273,6 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,

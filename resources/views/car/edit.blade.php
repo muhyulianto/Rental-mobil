@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header border-0">
                 <div class="card-title">
-                    Update informasi mobil
+                    Edit car data
                 </div>
             </div>
             <div class="card-body"> 
@@ -14,28 +14,28 @@
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
-                <label for="">Jenis mobil</label>
-                <input type="text" class="form-control" name="type" value="{{ $car->type }}" placeholder="">
+                    <label for="type">Type</label>
+                    <input type="text" class="form-control" name="type" value="{{ $car->type }}" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="">Car Name</label>
-                    <input type="text" class="form-control" name="name" value="{{ $car->name }}" placeholder="">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" value="{{ $car->name }}" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="">Merk mobil</label>
-                    <input type="text" class="form-control" name="brand" value="{{ $car->brand }}" placeholder="">
+                    <label for="brand">Brand</label>
+                    <input type="text" class="form-control" name="brand" value="{{ $car->brand }}" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="">Bahan bakar</label>
-                    <input type="text" class="form-control" name="fuel" value="{{ $car->fuel }}" placeholder="">
+                    <label for="fuel">Fuel</label>
+                    <input type="text" class="form-control" name="fuel" value="{{ $car->fuel }}" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="">Harga sewa</label>
-                    <input type="text" class="form-control" name="price" value="{{ $car->price }}" placeholder="">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" name="price" value="{{ $car->price }}" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="">Gambar</label>
-                    <input type="file" class="form-control-file" name="image" value="{{ $car->image }}" placeholder="" >
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" name="image" value="{{ $car->image }}">
                 </div>
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-upload    "></i> Update

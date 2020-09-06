@@ -3,7 +3,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header border-bottom-0">
-				<h5 class="modal-title">Tambah driver</h5>
+				<h5 class="modal-title">Add driver</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -12,22 +12,22 @@
 				<form action="{{ route("driver.store") }}" method="post" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
-					    <label for="name">Nama driver</label>
-					    <input type="text" class="form-control" name="name">
+					    <label for="name">Name</label>
+					    <input type="text" class="form-control" name="name" autocomplete="off" required>
 					</div>
 					<div class="form-group">
-					    <label for="age">Umur driver</label>
-					    <input type="text" class="form-control" name="age">
+					    <label for="age">Age</label>
+					    <input type="number" min="20" max="40" class="form-control" name="age" autocomplete="off" required>
 					</div>
 					<div class="form-group">
-					    <label for="phone_number">Nomor telepon</label>
-					    <input class="form-control" type="text" name="phone_number">
+					    <label for="phone_number">Phone Number</label>
+					    <input class="form-control" type="text" name="phone_number" autocomplete="off" required>
 					</div>
 					<div class="form-group">
-					    <label for="address">Alamat driver</label>
-					    <textarea class="form-control" name="address"></textarea>
+					    <label for="address">Address</label>
+					    <textarea class="form-control" name="address" required></textarea>
 					</div>
-					<button class="btn btn-primary" type="submit">Tambahkan</button>
+					<button class="btn btn-primary" type="submit">Add</button>
 				</form>
 			</div>
 		</div>

@@ -13,40 +13,9 @@ class DriverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        // set default order value
-        $orderBy = $request->orderBy ? $request->orderBy : 'created_at';
-        $orderType = $request->orderType ? $request->orderType : 'DESC';
-
-        if ($request->has('search_query')) {
-            $drivers = Driver::where('name', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('age', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('address', 'LIKE', '%' . $request->search_query . '%')
-                ->orWhere('status', 'LIKE', '%' . $request->search_query . '%')
-                ->orderBy($orderBy, $orderType)
-                ->paginate(10);
-        } else {
-            $drivers = Driver::orderBy($orderBy, $orderType)
-                ->paginate(10);
-        }
-
-        $drivers->appends([
-            'search_query' => $request->search_query
-        ]);
-
-        // append order query
-        if ($orderBy != 'created_at') {
-            $drivers->appends([
-                'orderBy'   => $orderBy,
-                'orderType' => $orderType
-            ]);
-        }
-
-        return view('driver.index')->with([
-            'drivers'   => $drivers,
-            'orderType' => $orderType == 'DESC' ? 'ASC' : 'DESC'
-        ]);
+        return view('driver.index');
     }
 
     /**
@@ -66,13 +35,9 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        $driver = new Driver;
-        $driver->name = $request->name;
-        $driver->age = $request->age;
-        $driver->address = $request->address;
-        $driver->phone_number = $request->phone_number;
-        $driver->save();
+        Driver::create($request->all());
 
+        Alert::success('Success!', 'Data has been added');
         return redirect()->route("driver.index");
     }
 
@@ -108,14 +73,14 @@ class DriverController extends Controller
      */
     public function update(Request $request, driver $driver)
     {
-        $driver = Driver::find($driver->id);
+        $driver = Driver::findOrFail($driver->id);
         $driver->name = $request->name;
         $driver->age = $request->age;
         $driver->address = $request->address;
         $driver->phone_number = $request->phone_number;
         $driver->save();
 
-        Alert::success('Berhasil', 'Data telah diupdate');
+        Alert::success('Success!', 'Data has been updated');
         return redirect()->route("driver.index");
     }
 
@@ -129,7 +94,7 @@ class DriverController extends Controller
     {
         Driver::find($driver->id)->delete();
 
-        Alert::success('Berhasil', 'Data telah dihapus');
+        Alert::success('Success!', 'Data has been deleted');
         return redirect()->back();
     }
 }

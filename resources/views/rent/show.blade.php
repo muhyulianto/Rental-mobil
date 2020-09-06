@@ -21,7 +21,7 @@
                         </tr>
                         <tr>
                             <td class="text-muted w-50">Car Name</td>
-                            <th class="text-right">{{ $rent->nama_lengkap_mobil }}</th>
+                            <th class="text-right">{{ $rent->car_full_name }}</th>
                         </tr>
                         <tr>
                             <td class="text-muted">Nomor plat</td>
@@ -64,7 +64,7 @@
                     </tbody>
                 </table>
                 @if ($rent->status == 'onloan')
-                <form class="mt-4" action="{{ route('rent_update', $rent->id) }}" method="post">
+                <form class="mt-4" action="{{ route('rents.update_onloan', $rent->id) }}" method="post">
                     @csrf
                     <button class="btn btn-primary" type="submit">
                         <i class="fas fa-forward    "></i>

@@ -18,7 +18,7 @@ class CreateCarsTable extends Migration
             $table->string('type');
             $table->string('name');
             $table->string('brand');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('fuel');
             $table->string('price');
             $table->timestamps();

@@ -15,7 +15,18 @@ class Driver extends Model
         'name', 'age', 'address', 'phone_number'
     ];
 
-    public function getFormatAgeAttribute() {
-        return $this->age." Tahun";
+    public function getFormatAgeAttribute()
+    {
+        if (($this->age / 10) % 10 != 1) {
+            switch ($this->age % 10) {
+                case 1:
+                    return $this->age . "st";
+                case 2:
+                    return $this->age . "nd";
+                case 3:
+                    return $this->age . "rd";
+            }
+        }
+        return $this->age . "th";
     }
 }

@@ -7,9 +7,8 @@ use Carbon\Carbon;
 
 class Rent extends Model
 {
-
     protected $fillable = [
-        'customer_id', 'car_id', 'id_armada', 'services_type', 'driver_id', 'start_date', 'duration', 'end_date', 'pickup_location'
+        'customer_id', 'car_id', 'services_type', 'start_date', 'duration', 'pickup_location'
     ];
 
     /**
@@ -61,11 +60,10 @@ class Rent extends Model
     public function getFormatServicesTypeAttribute()
     {
         $text = ($this->services_type == 3 ? 'Car, Driver and Fuel' : ($this->services_type == 2 ? 'Car and Driver' : 'Car'));
-
         return $text;
     }
 
-    public function getNamaLengkapMobilAttribute()
+    public function getCarFullNameAttribute()
     {
         return "{$this->cars->brand} {$this->cars->name}";
     }

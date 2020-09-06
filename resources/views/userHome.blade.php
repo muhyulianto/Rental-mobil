@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row align-items-center" style="min-height: 100vh">
+    <div class="row align-items-end">
         @foreach ($cars as $car)
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm">

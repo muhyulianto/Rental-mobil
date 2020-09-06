@@ -3,16 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Invoice;
+use App\Traits\DataTableTraits;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class InvoiceTable extends Component
 {
-    use WithPagination;
-    public $orderBy = 'created_at';
-    public $orderAsc = false;
-    public $perPage = 10;
-    public $search = '';
+    use DataTableTraits;
 
     public function render()
     {
@@ -27,15 +23,5 @@ class InvoiceTable extends Component
             ->paginate($this->perPage);
 
         return view('livewire.invoice-table')->with('invoices', $invoices);
-    }
-
-    public function ordering($orderBy)
-    {
-        $this->orderBy = $orderBy;
-        if ($this->orderBy === $orderBy) {
-            $this->orderAsc = !$this->orderAsc;
-        } else {
-            $this->orderAsc = true;
-        }
     }
 }
